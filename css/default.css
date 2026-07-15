@@ -795,6 +795,13 @@ body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--dis
     color: var(--risu-text-muted);
 }
 
+.risu .live-recent-empty {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--risu-text-muted);
+    text-align: center;
+}
+
 .risu .live-recent-footer {
     padding: 0.55rem 1.1rem 0.8rem;
     text-align: right;

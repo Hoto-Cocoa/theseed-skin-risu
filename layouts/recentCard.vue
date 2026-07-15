@@ -1,9 +1,12 @@
 <template>
     <div class="live-recent-content">
         <ul class="live-recent-list">
-            <template v-if="recent.length === 0">
+            <template v-if="recent.length === 0 && !loaded">
                 <li v-for="i in 10" :key="i"><span class="recent-item">&nbsp;</span></li>
             </template>
+            <li v-else-if="recent.length === 0" class="live-recent-empty">
+                아직 표시할 문서가 없습니다.
+            </li>
             <template v-else>
                 <template v-for="(r, i) in recent" :key="i">
                     <li v-if="i < limit">
@@ -31,6 +34,15 @@ export default {
             type: Number,
             default: 15
         }
+    },
+    data() {
+        return {
+            loaded: false
+        };
+    },
+    async mounted() {
+        await this.updateSidebar();
+        this.loaded = true;
     },
     methods: {
         getDateType(date) {
