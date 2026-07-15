@@ -183,19 +183,33 @@ export default {
             const r = parseInt(shadow.substring(1, 3), 16);
             const g = parseInt(shadow.substring(3, 5), 16);
             const b = parseInt(shadow.substring(5, 7), 16);
+            /* 텍스트 웜톤도 파생 (기본 핑크 기준 #43333A ≈ darken 74%, #8A6E77 ≈ darken 46%) */
+            const soft = this.lightenColor(brand, 35);
+            const rose = this.darkenColor(brand, 45);
+            const text = this.darkenColor(brand, 74);
+            const muted = this.darkenColor(brand, 46);
             const vars = [
                 `--risu-pink:${brand}`,
-                `--risu-pink-soft:${this.lightenColor(brand, 35)}`,
+                `--risu-pink-soft:${soft}`,
                 `--risu-pink-mist:${this.lightenColor(brand, 65)}`,
                 `--risu-page-bg:${this.lightenColor(brand, 80)}`,
                 `--risu-border:${this.lightenColor(brand, 20)}`,
                 `--risu-border-soft:${this.lightenColor(brand, 50)}`,
-                `--risu-rose:${this.darkenColor(brand, 45)}`,
+                `--risu-rose:${rose}`,
                 `--risu-rose-hover:${this.darkenColor(brand, 55)}`,
                 `--risu-rose-deep:${this.darkenColor(brand, 70)}`,
+                `--risu-text:${text}`,
+                `--risu-text-muted:${muted}`,
                 `--risu-shadow-sm:0 2px 8px rgba(${r},${g},${b},0.10)`,
                 `--risu-shadow-md:0 6px 20px rgba(${r},${g},${b},0.14)`,
-                `--risu-shadow-lg:0 10px 32px rgba(${r},${g},${b},0.18)`
+                `--risu-shadow-lg:0 10px 32px rgba(${r},${g},${b},0.18)`,
+                /* :root에 선언된 제네릭 매핑은 그 시점 값으로 굳으므로 여기서 재선언 */
+                `--text-color:${text}`,
+                `--text-secondary-color:${muted}`,
+                `--brand-color-1:${rose}`,
+                `--brand-color-2:${rose}`,
+                `--brand-bright-color-1:${soft}`,
+                `--brand-bright-color-2:${soft}`
             ].join(';');
             return `body:not(.theseed-dark-mode) .risu{${vars}}`;
         },
