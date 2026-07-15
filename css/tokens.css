@@ -1,0 +1,71 @@
+/* risu design tokens
+ * #FFC0CB 계열 원색은 장식(배경·보더) 전용.
+ * 읽히는 텍스트는 --risu-rose / --risu-rose-deep / --risu-text 만 사용한다.
+ */
+
+.risu {
+    /* brand */
+    --risu-pink: #FFC0CB;
+    --risu-pink-soft: #FFD9E0;
+    --risu-pink-mist: #FFECF0;
+
+    /* surfaces */
+    --risu-page-bg: #FFF5F7;
+    --risu-card-bg: #FFFFFF;
+    --risu-border: #F6CDD7;
+    --risu-border-soft: #FBE3E9;
+
+    /* interactive / text */
+    --risu-rose: #C2426A;        /* 4.9:1 on #FFF */
+    --risu-rose-hover: #A93058;
+    --risu-rose-deep: #6E2438;   /* 6.9:1 on #FFC0CB */
+    --risu-text: #43333A;
+    --risu-text-muted: #8A6E77;
+    --risu-danger: #D64560;
+    --risu-danger-mist: #FFE3E8;
+    --risu-success-mist: #DFF3E3;
+    --risu-success-deep: #1E5B33;
+
+    /* radii */
+    --risu-radius-sm: 8px;
+    --risu-radius-md: 14px;
+    --risu-radius-lg: 20px;
+    --risu-radius-pill: 999px;
+
+    /* shadows */
+    --risu-shadow-sm: 0 2px 8px rgba(201, 90, 124, 0.10);
+    --risu-shadow-md: 0 6px 20px rgba(201, 90, 124, 0.14);
+    --risu-shadow-lg: 0 10px 32px rgba(201, 90, 124, 0.18);
+
+    /* typography */
+    --risu-font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", "Noto Sans KR", "Malgun Gothic", "맑은 고딕",
+        "Apple SD Gothic Neo", sans-serif;
+    --risu-font-mono: "Cascadia Code", "D2Coding", Consolas, "Nanum Gothic Coding",
+        monospace;
+}
+
+body.theseed-dark-mode .risu {
+    --risu-pink: #3A242D;
+    --risu-pink-soft: #4A2F3A;
+    --risu-pink-mist: #33212A;
+
+    --risu-page-bg: #211419;
+    --risu-card-bg: #2B1C22;
+    --risu-border: #4C333D;
+    --risu-border-soft: #3B2831;
+
+    --risu-rose: #FF9EB8;        /* 8.4:1 on #2B1C22 */
+    --risu-rose-hover: #FFBACB;
+    --risu-rose-deep: #FFD3DD;
+    --risu-text: #F0DEE4;
+    --risu-text-muted: #B08E9B;
+    --risu-danger: #FF7A93;
+    --risu-danger-mist: #4A2530;
+    --risu-success-mist: #24392B;
+    --risu-success-deep: #A8DDB6;
+
+    --risu-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.30);
+    --risu-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.36);
+    --risu-shadow-lg: 0 10px 32px rgba(0, 0, 0, 0.44);
+}

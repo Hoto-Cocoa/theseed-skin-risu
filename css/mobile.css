@@ -1,0 +1,89 @@
+/* risu — responsive */
+
+@media (max-width: 1023px) {
+    .risu .risu-navbar,
+    .risu.wide .risu-navbar {
+        top: 0;
+        width: 100%;
+        flex-wrap: wrap;
+        border-radius: 0 0 var(--risu-radius-lg) var(--risu-radius-lg);
+        padding: 0.45rem 0.8rem;
+    }
+
+    .risu .risu-search {
+        order: 10;
+        flex: 1 1 100%;
+        margin: 0.15rem 0 0.35rem;
+    }
+
+    .risu .risu-wrap,
+    .risu.wide .risu-wrap {
+        grid-template-columns: minmax(0, 1fr);
+        width: calc(100% - 1.2rem);
+        padding-top: 7.6rem;
+    }
+
+    .risu .risu-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 798px) {
+    .risu .risu-nav-link .hide-title {
+        display: none;
+    }
+
+    .risu .risu-nav-link {
+        padding: 0.42rem 0.6rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .risu .risu-content {
+        padding: 1rem 1rem 1.2rem;
+        border-radius: var(--risu-radius-md);
+    }
+
+    .risu .risu-content-header .title h1 {
+        font-size: 1.55rem;
+    }
+
+    .risu .content-tools {
+        float: none;
+        margin: 0 0 0.7rem;
+        overflow-x: auto;
+    }
+
+    .risu .wiki-article table.wikitable,
+    .risu .wiki-article table.infobox {
+        float: none !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .risu .wiki-article iframe {
+        max-width: 100%;
+    }
+
+    .risu .risu-wrap {
+        padding-top: 7.2rem;
+    }
+}
+
+@media (max-width: 397px) {
+    .risu .risu-brand {
+        font-size: 1rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .risu .risu-navbar {
+        padding: 0.4rem 0.55rem;
+    }
+
+    .risu .scroll-buttons a {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+}

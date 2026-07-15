@@ -1,0 +1,775 @@
+/* risu — layout & chrome */
+
+/* ===== base ===== */
+
+html {
+    font-size: 15px;
+}
+
+body {
+    margin: 0;
+}
+
+.risu,
+.risu *,
+.risu *::before,
+.risu *::after {
+    box-sizing: border-box;
+}
+
+.risu {
+    min-height: 100vh;
+    background-color: var(--risu-page-bg);
+    color: var(--risu-text);
+    font-family: var(--risu-font);
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+.risu a {
+    color: var(--risu-rose);
+    text-decoration: none;
+}
+
+.risu a:hover {
+    color: var(--risu-rose-hover);
+    text-decoration: underline;
+}
+
+.risu img {
+    max-width: 100%;
+}
+
+.risu hr {
+    border: 0;
+    border-top: 1px solid var(--risu-border-soft);
+}
+
+.risu input[type="search"] {
+    -webkit-appearance: none;
+}
+
+/* ===== generic controls (부트스트랩 미포함 — 자체 구현) ===== */
+
+.risu .btn {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    line-height: 1.4;
+    color: var(--risu-rose);
+    background-color: var(--risu-card-bg);
+    border: 1px solid var(--risu-border);
+    border-radius: var(--risu-radius-sm);
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    user-select: none;
+    transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.risu .btn:hover,
+.risu .btn:focus {
+    background-color: var(--risu-pink-mist);
+    color: var(--risu-rose-hover);
+    text-decoration: none;
+    outline: 0;
+}
+
+.risu .btn.disabled,
+.risu .btn:disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.risu .btn-primary {
+    background-color: var(--risu-pink);
+    border-color: var(--risu-pink);
+    color: var(--risu-rose-deep);
+}
+
+.risu .btn-primary:hover,
+.risu .btn-primary:focus {
+    background-color: var(--risu-pink-soft);
+    border-color: var(--risu-pink-soft);
+    color: var(--risu-rose-deep);
+}
+
+.risu .btn-danger {
+    background-color: var(--risu-danger);
+    border-color: var(--risu-danger);
+    color: #fff;
+}
+
+.risu .btn-danger:hover,
+.risu .btn-danger:focus {
+    background-color: var(--risu-danger);
+    border-color: var(--risu-danger);
+    color: #fff;
+    filter: brightness(0.92);
+}
+
+.risu .btn-info {
+    background-color: var(--risu-pink-mist);
+    border-color: var(--risu-border);
+    color: var(--risu-rose-deep);
+}
+
+.risu .btn-group {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.risu .btn-group > .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+
+.risu .btn-group > .btn:first-child {
+    border-top-left-radius: var(--risu-radius-sm);
+    border-bottom-left-radius: var(--risu-radius-sm);
+    margin-left: 0;
+}
+
+.risu .btn-group > .btn:last-child,
+.risu .btn-group > .dropdown:last-child {
+    border-top-right-radius: var(--risu-radius-sm);
+    border-bottom-right-radius: var(--risu-radius-sm);
+}
+
+.risu .form-control,
+.risu input[type="text"],
+.risu input[type="search"],
+.risu input[type="password"],
+.risu textarea,
+.risu select {
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--risu-text);
+    background-color: var(--risu-card-bg);
+    border: 1px solid var(--risu-border);
+    border-radius: var(--risu-radius-sm);
+    padding: 0.35rem 0.7rem;
+}
+
+.risu .form-control:focus,
+.risu input:focus,
+.risu textarea:focus {
+    outline: 0;
+    border-color: var(--risu-rose);
+    box-shadow: 0 0 0 3px var(--risu-pink-mist);
+}
+
+.risu textarea {
+    font-family: var(--risu-font-mono);
+    line-height: 1.5;
+}
+
+.risu .alert {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--risu-border);
+    border-radius: var(--risu-radius-md);
+    background-color: var(--risu-pink-mist);
+    color: var(--risu-text);
+}
+
+.risu .alert-danger,
+.risu .alert-error {
+    background-color: var(--risu-danger-mist);
+    border-color: var(--risu-danger);
+}
+
+.risu .alert-success {
+    background-color: var(--risu-success-mist);
+    border-color: var(--risu-success-deep);
+}
+
+.risu .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.risu .float-right {
+    float: right;
+}
+
+.risu .label {
+    display: inline-block;
+    padding: 0.15em 0.7em;
+    font-size: 0.8rem;
+    border-radius: var(--risu-radius-pill);
+    background-color: var(--risu-pink);
+    color: var(--risu-rose-deep);
+}
+
+/* ===== dropdown ===== */
+
+.risu .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.risu .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 120;
+    min-width: 12rem;
+    margin-top: 0.45rem;
+    padding: 0.45rem;
+    background-color: var(--risu-card-bg);
+    border: 1px solid var(--risu-border-soft);
+    border-radius: var(--risu-radius-md);
+    box-shadow: var(--risu-shadow-lg);
+}
+
+.risu .dropdown-menu-right {
+    left: auto;
+    right: 0;
+}
+
+.risu .dropdown-item {
+    display: block;
+    padding: 0.42rem 0.75rem;
+    font-size: 0.9rem;
+    color: var(--risu-text);
+    border-radius: var(--risu-radius-sm);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.risu .dropdown-item:hover {
+    background-color: var(--risu-pink-mist);
+    color: var(--risu-rose-hover);
+    text-decoration: none;
+}
+
+.risu .dropdown-divider {
+    height: 1px;
+    margin: 0.4rem 0.3rem;
+    background-color: var(--risu-border-soft);
+}
+
+.risu .caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 0.32em solid currentColor;
+    border-left: 0.32em solid transparent;
+    border-right: 0.32em solid transparent;
+}
+
+/* ===== navbar (floating pill) ===== */
+
+.risu .risu-navbar {
+    position: absolute;
+    top: 0.8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 110;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    width: min(1200px, calc(100% - 1.6rem));
+    min-height: 3.4rem;
+    padding: 0.35rem 0.9rem;
+    background-color: var(--risu-pink);
+    border-radius: var(--risu-radius-pill);
+    box-shadow: var(--risu-shadow-md);
+}
+
+.risu.navbar-fixed .risu-navbar {
+    position: fixed;
+}
+
+.risu.wide .risu-navbar {
+    width: min(1600px, calc(100% - 1.6rem));
+}
+
+.risu .risu-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--risu-rose-deep);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--risu-radius-pill);
+    white-space: nowrap;
+}
+
+.risu .risu-brand:hover {
+    color: var(--risu-rose-deep);
+    background-color: var(--risu-pink-soft);
+    text-decoration: none;
+}
+
+.risu .risu-brand img {
+    display: block;
+    max-height: 2.4rem;
+    width: var(--risu-logo-width, auto);
+}
+
+.risu .risu-nav {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.risu .risu-nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38em;
+    padding: 0.42rem 0.8rem;
+    font-size: 0.92rem;
+    color: var(--risu-rose-deep);
+    border-radius: var(--risu-radius-pill);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.risu .risu-nav-link:hover {
+    color: var(--risu-rose-deep);
+    background-color: var(--risu-pink-soft);
+    text-decoration: none;
+}
+
+.risu .risu-user {
+    display: flex;
+    align-items: center;
+}
+
+.risu .risu-user-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--risu-rose-deep);
+    border-radius: var(--risu-radius-pill);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.risu .risu-user-toggle:hover {
+    background-color: var(--risu-pink-soft);
+}
+
+.risu .risu-user-toggle .profile-img {
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: var(--risu-radius-pill);
+}
+
+.risu .risu-user .username {
+    cursor: default;
+    color: var(--risu-text-muted);
+}
+
+.risu .risu-user .username b {
+    color: var(--risu-text);
+}
+
+.risu .risu-user .username:hover {
+    background-color: transparent;
+    color: var(--risu-text-muted);
+}
+
+/* ===== search ===== */
+
+.risu .risu-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 0 1 17rem;
+    margin-left: auto;
+    margin-right: 0.35rem;
+}
+
+.risu .risu-search .input-search {
+    position: relative;
+    flex: 1 1 auto;
+}
+
+.risu .risu-search input[type="search"] {
+    width: 100%;
+    padding: 0.45rem 4.6rem 0.45rem 1rem;
+    border: 1px solid transparent;
+    border-radius: var(--risu-radius-pill);
+    background-color: var(--risu-card-bg);
+    color: var(--risu-text);
+    font-size: 0.92rem;
+}
+
+.risu .risu-search input[type="search"]::placeholder {
+    color: var(--risu-text-muted);
+}
+
+.risu .risu-search .risu-search-buttons {
+    position: absolute;
+    right: 0.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 0.1rem;
+}
+
+.risu .risu-search .risu-search-buttons button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--risu-radius-pill);
+    background: transparent;
+    color: var(--risu-rose);
+    cursor: pointer;
+}
+
+.risu .risu-search .risu-search-buttons button:hover {
+    background-color: var(--risu-pink-mist);
+    color: var(--risu-rose-hover);
+}
+
+.risu .v-autocomplete-list {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    left: 0;
+    right: 0;
+    z-index: 130;
+    padding: 0.35rem;
+    background-color: var(--risu-card-bg);
+    border: 1px solid var(--risu-border-soft);
+    border-radius: var(--risu-radius-md);
+    box-shadow: var(--risu-shadow-lg);
+    overflow: hidden;
+}
+
+.risu .v-autocomplete-list-item {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+    color: var(--risu-text);
+    border-radius: var(--risu-radius-sm);
+    cursor: pointer;
+    word-break: break-all;
+}
+
+.risu .v-autocomplete-list-item.v-autocomplete-item-active {
+    background-color: var(--risu-pink-mist);
+    color: var(--risu-rose-hover);
+}
+
+/* ===== page frame ===== */
+
+.risu .risu-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 1.25rem;
+    align-items: start;
+    width: min(1200px, calc(100% - 1.6rem));
+    margin: 0 auto;
+    padding-top: 5.6rem;
+    padding-bottom: 2rem;
+}
+
+.risu.wide .risu-wrap {
+    width: min(1600px, calc(100% - 1.6rem));
+}
+
+.risu .risu-wrap.hide-sidebar {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.risu .risu-wrap.hide-sidebar .risu-sidebar {
+    display: none;
+}
+
+/* ===== notice ===== */
+
+.risu .risu-notice {
+    margin-bottom: 1rem;
+    padding: 0.7rem 1.2rem;
+    background-color: var(--risu-pink-soft);
+    border-radius: var(--risu-radius-md);
+    color: var(--risu-rose-deep);
+    box-shadow: var(--risu-shadow-sm);
+}
+
+.risu .risu-notice a {
+    color: var(--risu-rose-deep);
+    text-decoration: underline;
+}
+
+/* ===== content card ===== */
+
+.risu .risu-content {
+    background-color: var(--article-background-color, var(--risu-card-bg));
+    border-radius: var(--risu-radius-lg);
+    box-shadow: var(--risu-shadow-md);
+    padding: 1.3rem 1.6rem 1.6rem;
+    overflow-wrap: break-word;
+}
+
+.risu .risu-content-header .title h1 {
+    margin: 0 0 0.3rem;
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.risu .risu-content-header .title h1 a {
+    color: var(--risu-text);
+}
+
+.risu .risu-content-header .title h1 a:hover {
+    color: var(--risu-rose);
+    text-decoration: none;
+}
+
+.risu .risu-content-header .title h1 .namespace {
+    color: var(--risu-text-muted);
+}
+
+.risu .risu-content-header .title h1 small {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--risu-text-muted);
+}
+
+.risu .risu-content-header::after {
+    content: "";
+    display: block;
+    height: 3px;
+    margin: 0.55rem 0 1rem;
+    border-radius: var(--risu-radius-pill);
+    background: linear-gradient(90deg, var(--risu-pink), var(--risu-pink-mist));
+}
+
+/* content tools (contentTool.vue) */
+
+.risu .content-tools {
+    float: right;
+    margin: 0.25rem 0 0.5rem 0.8rem;
+}
+
+.risu .content-tools .tools-btn {
+    font-size: 0.88rem;
+    padding: 0.38rem 0.75rem;
+}
+
+.risu .content-tools .tools-btn .star-icon {
+    color: var(--risu-rose);
+    margin-right: 0.15em;
+}
+
+.risu .content-tools .tools-btn .star-icon.star-off {
+    opacity: 0.45;
+}
+
+.risu .content-tools .dropdown.btn.tools-btn {
+    padding: 0;
+}
+
+.risu .content-tools .dropdown-toggle {
+    padding: 0.42rem 0.5rem;
+}
+
+.risu .content-tools .tools-btn.btn-discuss-progress {
+    background-color: var(--risu-success-mist);
+    color: var(--risu-success-deep);
+}
+
+.risu .content-tools .dropdown-menu {
+    top: auto;
+}
+
+.risu .dropdown-item.admin {
+    color: var(--risu-danger);
+}
+
+.risu .dropdown-item.admin:hover {
+    background-color: var(--risu-danger-mist);
+    color: var(--risu-danger);
+}
+
+/* ===== wiki article ===== */
+
+.risu .wiki-article {
+    min-height: 25rem;
+    color: var(--text-color, var(--risu-text));
+}
+
+.risu .wiki-article h1,
+.risu .wiki-article h2,
+.risu .wiki-article h3,
+.risu .wiki-article h4,
+.risu .wiki-article h5,
+.risu .wiki-article h6 {
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 1.2em 0 0.5em;
+}
+
+.risu .wiki-article h1 { font-size: 1.8rem; }
+.risu .wiki-article h2 { font-size: 1.55rem; }
+.risu .wiki-article h3 { font-size: 1.35rem; }
+.risu .wiki-article h4 { font-size: 1.15rem; }
+.risu .wiki-article h5 { font-size: 1.05rem; }
+.risu .wiki-article h6 { font-size: 0.95rem; }
+
+.risu .wiki-article h1,
+.risu .wiki-article h2,
+.risu .wiki-article h3,
+.risu .wiki-article h4 {
+    border-bottom: 2px solid var(--risu-pink-soft);
+    padding-bottom: 0.2em;
+}
+
+.risu .wiki-article pre {
+    font-family: var(--risu-font-mono);
+    font-size: 0.9rem;
+    background-color: var(--risu-pink-mist);
+    border: 1px solid var(--risu-border-soft);
+    border-radius: var(--risu-radius-md);
+    padding: 0.8rem 1rem;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+.risu .wiki-article code {
+    font-family: var(--risu-font-mono);
+}
+
+.risu .wiki-article blockquote {
+    margin: 0.8em 0;
+    padding: 0.4em 1em;
+    border-left: 4px solid var(--risu-pink);
+    background-color: var(--risu-pink-mist);
+    border-radius: 0 var(--risu-radius-sm) var(--risu-radius-sm) 0;
+}
+
+.risu .wiki-article .mobile-table-wrapper {
+    overflow-x: auto;
+}
+
+/* ===== footer ===== */
+
+.risu .risu-footer {
+    margin-top: 1.1rem;
+    padding: 0 1.2rem;
+    font-size: 0.85rem;
+    color: var(--risu-text-muted);
+}
+
+.risu .risu-footer ul {
+    list-style: none;
+    margin: 0 0 0.4rem;
+    padding: 0;
+}
+
+.risu .risu-footer .footer-places {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 1rem;
+}
+
+.risu .footer-recent {
+    margin-top: 1.25rem;
+}
+
+/* ===== sidebar / live recent card ===== */
+
+.risu .live-recent {
+    background-color: var(--risu-card-bg);
+    border-radius: var(--risu-radius-lg);
+    box-shadow: var(--risu-shadow-md);
+    overflow: hidden;
+}
+
+.risu .live-recent-header {
+    padding: 0.7rem 1.1rem;
+    background-color: var(--risu-pink);
+    color: var(--risu-rose-deep);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.risu .live-recent-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.45rem 0.55rem;
+}
+
+.risu .live-recent-list li + li {
+    border-top: 1px solid var(--risu-border-soft);
+}
+
+.risu .live-recent-list .recent-item {
+    display: block;
+    padding: 0.32rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--risu-text);
+    border-radius: var(--risu-radius-sm);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.risu .live-recent-list .recent-item:hover {
+    background-color: var(--risu-pink-mist);
+    color: var(--risu-rose-hover);
+    text-decoration: none;
+}
+
+.risu .live-recent-list .recent-item.removed {
+    text-decoration: line-through;
+    color: var(--risu-text-muted);
+}
+
+.risu .live-recent-footer {
+    padding: 0.55rem 1.1rem 0.8rem;
+    text-align: right;
+}
+
+/* ===== scroll buttons ===== */
+
+.risu .scroll-buttons {
+    position: fixed;
+    right: 1rem;
+    bottom: 1.2rem;
+    z-index: 105;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.risu .scroll-buttons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--risu-pink);
+    color: var(--risu-rose-deep);
+    border-radius: var(--risu-radius-pill);
+    box-shadow: var(--risu-shadow-md);
+}
+
+.risu .scroll-buttons a:hover {
+    background-color: var(--risu-pink-soft);
+    text-decoration: none;
+}
+
+/* ===== icons ===== */
+
+.risu .risu-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: currentColor;
+}

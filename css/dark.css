@@ -1,0 +1,30 @@
+/* risu — dark-mode rules that tokens cannot cover */
+
+body.theseed-dark-mode .risu {
+    color-scheme: dark;
+}
+
+body.theseed-dark-mode .risu ::selection {
+    background-color: var(--risu-pink-soft);
+    color: var(--risu-rose-deep);
+}
+
+body.theseed-dark-mode .risu ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.theseed-dark-mode .risu ::-webkit-scrollbar-track {
+    background: var(--risu-page-bg);
+}
+
+body.theseed-dark-mode .risu ::-webkit-scrollbar-thumb {
+    background: var(--risu-pink-soft);
+    border-radius: var(--risu-radius-pill);
+}
+
+body.theseed-dark-mode .risu .btn-danger,
+body.theseed-dark-mode .risu .btn-danger:hover,
+body.theseed-dark-mode .risu .btn-danger:focus {
+    color: #2B1218;
+}
