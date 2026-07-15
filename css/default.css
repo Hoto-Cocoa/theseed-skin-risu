@@ -167,26 +167,34 @@ body {
     border-bottom-right-radius: var(--risu-radius-sm);
 }
 
-/* :not(.input) — 엔진 inputField 컴포넌트(.input)는 자체 스타일을 쓰므로 건드리지 않는다 */
+/* 색은 --input-* 변수를 우선 참조 — 엔진 inputField(.input)가 상태(error/disabled)를
+ * 이 변수들로 표현하므로, 직접 색을 박으면 오류 표시가 사라진다 */
 .risu .form-control,
-.risu input[type="text"]:not(.input),
-.risu input[type="search"]:not(.input),
-.risu input[type="password"]:not(.input),
-.risu input[type="email"]:not(.input),
+.risu input[type="text"],
+.risu input[type="search"],
+.risu input[type="password"],
+.risu input[type="email"],
+.risu input[type="number"],
 .risu textarea,
 .risu select {
     font-family: inherit;
     font-size: 0.95rem;
-    color: var(--risu-text);
-    background-color: var(--risu-card-bg);
-    border: 1px solid var(--risu-border);
+    color: var(--input-color, var(--risu-text));
+    background-color: var(--input-background-color, var(--risu-card-bg));
+    border: 1px solid var(--input-border-color, var(--risu-border));
     border-radius: var(--risu-radius-sm);
     padding: 0.35rem 0.7rem;
 }
 
+/* 엔진 inputField의 기본 상태 변수만 팔레트로 교체 (error/disabled는 엔진 값 유지) */
+.risu .input:not(.error):not(.disabled) {
+    --input-background-color: var(--risu-card-bg);
+    --input-border-color: var(--risu-border);
+}
+
 .risu .form-control:focus,
-.risu input:not(.input):focus,
-.risu textarea:focus {
+.risu input:not(.error):focus,
+.risu textarea:not(.error):focus {
     outline: 0;
     border-color: var(--risu-rose);
     box-shadow: 0 0 0 3px var(--risu-pink-mist);
@@ -701,25 +709,6 @@ body {
 
 .risu .wiki-article .mobile-table-wrapper {
     overflow-x: auto;
-}
-
-/* 엔진 알림 박스(thetree-alert)를 팔레트에 맞게 틴트.
- * 컴포넌트 scoped 스타일과의 로드 순서가 보장되지 않으므로 !important 사용. */
-.risu .thetree-alert {
-    background-color: var(--risu-pink-mist) !important;
-    border-color: var(--risu-border-soft) !important;
-    border-radius: var(--risu-radius-md) !important;
-}
-
-.risu .thetree-alert-primary {
-    background-color: var(--risu-pink-soft) !important;
-    border-color: var(--risu-border) !important;
-    color: var(--risu-rose-deep) !important;
-}
-
-.risu .thetree-alert-danger {
-    background-color: var(--risu-danger-mist) !important;
-    border-color: var(--risu-danger) !important;
 }
 
 /* 문단 접기 화살표: Ionicons 글리프 대신 회전하는 셰브런 */
