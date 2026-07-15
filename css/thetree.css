@@ -84,8 +84,24 @@ body.theseed-dark-mode .risu .wiki-article button.submit:focus {
     --focus-outline-color: var(--risu-pink-soft);
 }
 
+/* 다크 모드: 엔진 다크 규칙(.theseed-dark-mode .button--primary:not(...))과 위
+ * 라이트용 규칙이 특이도 동점(0,3,0)이라 로드 순서에 따라 엔진 파랑이 이길 수 있다.
+ * 그 경우 아래 텍스트 오버라이드만 적용돼 "파란 배경 + 어두운 글자 = disabled처럼
+ * 보이는" 조합이 됨. body 스코프(0,4,0)로 배경까지 결정적으로 덮는다.
+ * (--risu-rose는 다크에서 밝은 핑크이므로 텍스트는 어둡게) */
 body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--disabled"]) {
+    --button-background-color: var(--risu-rose);
+    --button-border-color: var(--risu-rose);
     --button-color: #2B1218;
+}
+
+body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):hover {
+    --button-background-color: var(--risu-rose-hover);
+    --button-border-color: var(--risu-rose-hover);
+}
+
+body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):focus-visible {
+    --focus-outline-color: var(--risu-pink-soft);
 }
 
 /* inputField(.input)의 기본 상태 변수만 팔레트로 교체 (error/disabled는 엔진 값 유지) */
