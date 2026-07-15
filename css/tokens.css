@@ -1,9 +1,12 @@
 /* risu design tokens
  * #FFC0CB 계열 원색은 장식(배경·보더) 전용.
  * 읽히는 텍스트는 --risu-rose / --risu-rose-deep / --risu-text 만 사용한다.
+ *
+ * :root에 선언하는 이유: 엔진 모달/팝업(vfm, context menu)은 스킨 루트(.risu)
+ * 밖으로 teleport되므로 .risu에만 선언하면 변수를 상속받지 못한다.
  */
 
-.risu {
+:root {
     /* brand */
     --risu-pink: #FFC0CB;
     --risu-pink-soft: #FFD9E0;
@@ -43,9 +46,22 @@
         "Apple SD Gothic Neo", sans-serif;
     --risu-font-mono: "Cascadia Code", "D2Coding", Consolas, "Nanum Gothic Coding",
         monospace;
+
+    /* 엔진 컴포넌트(모달, 컨텍스트 메뉴, 폼)가 소비하는 제네릭 변수 */
+    --text-color: var(--risu-text);
+    --text-secondary-color: var(--risu-text-muted);
+    --article-background-color: var(--risu-card-bg);
+    --light-text-color: #43333A;
+    --dark-text-color: #F0DEE4;
+    --light-article-background-color: #FFFFFF;
+    --dark-article-background-color: #2B1C22;
+    --brand-color-1: var(--risu-rose);
+    --brand-color-2: var(--risu-rose);
+    --brand-bright-color-1: var(--risu-pink-soft);
+    --brand-bright-color-2: var(--risu-pink-soft);
 }
 
-body.theseed-dark-mode .risu {
+body.theseed-dark-mode {
     --risu-pink: #3A242D;
     --risu-pink-soft: #4A2F3A;
     --risu-pink-mist: #33212A;

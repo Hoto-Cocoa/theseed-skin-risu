@@ -6,8 +6,14 @@ html {
     font-size: 15px;
 }
 
+/* 엔진 모달/팝업은 .risu 밖으로 teleport되므로 body 레벨에도 기본 색·서체를 깔아준다 */
 body {
     margin: 0;
+    font-family: var(--risu-font);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--risu-text);
+    background-color: var(--risu-page-bg);
 }
 
 .risu,
@@ -22,6 +28,7 @@ body {
     background-color: var(--risu-page-bg);
     color: var(--risu-text);
     font-family: var(--risu-font);
+    font-size: 1rem;
     line-height: 1.6;
     word-break: break-all;
 }
@@ -137,10 +144,12 @@ body {
     border-bottom-right-radius: var(--risu-radius-sm);
 }
 
+/* :not(.input) — 엔진 inputField 컴포넌트(.input)는 자체 스타일을 쓰므로 건드리지 않는다 */
 .risu .form-control,
-.risu input[type="text"],
-.risu input[type="search"],
-.risu input[type="password"],
+.risu input[type="text"]:not(.input),
+.risu input[type="search"]:not(.input),
+.risu input[type="password"]:not(.input),
+.risu input[type="email"]:not(.input),
 .risu textarea,
 .risu select {
     font-family: inherit;
@@ -153,7 +162,7 @@ body {
 }
 
 .risu .form-control:focus,
-.risu input:focus,
+.risu input:not(.input):focus,
 .risu textarea:focus {
     outline: 0;
     border-color: var(--risu-rose);
@@ -223,6 +232,8 @@ body {
     border: 1px solid var(--risu-border-soft);
     border-radius: var(--risu-radius-md);
     box-shadow: var(--risu-shadow-lg);
+    /* .btn 안에 열리는 드롭다운(.content-tools)이 text-align: center를 상속받지 않도록 */
+    text-align: left;
 }
 
 .risu .dropdown-menu-right {
@@ -539,6 +550,7 @@ body {
     font-size: 1.05rem;
     font-weight: 400;
     color: var(--risu-text-muted);
+    margin-left: 0.3em;
 }
 
 .risu .risu-content-header::after {

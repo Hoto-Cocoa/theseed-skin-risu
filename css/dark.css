@@ -1,6 +1,6 @@
 /* risu — dark-mode rules that tokens cannot cover */
 
-body.theseed-dark-mode .risu {
+body.theseed-dark-mode {
     color-scheme: dark;
 }
 
