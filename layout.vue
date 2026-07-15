@@ -127,7 +127,8 @@ export default {
     },
     head() {
         return {
-            meta: [{ name: 'theme-color', content: this.brand_color }]
+            meta: [{ name: 'theme-color', content: this.brand_color }],
+            style: this.brandOverrideCss ? [{ children: this.brandOverrideCss }] : []
         };
     },
     computed: {
@@ -145,28 +146,28 @@ export default {
             };
         },
         skinConfig() {
-            const brand = this.$store.state.config['skin.risu.brand_color'];
-            const config = {
+            /* 테마 의존 값을 여기(인라인 스타일)에 넣으면 SSR 첫 페인트와
+             * 하이드레이션 사이에 색이 튄다. 테마별 값은 전부 tokens.css가 담당하고,
+             * 인라인은 테마와 무관한 값만 유지한다. */
+            return {
                 '--risu-logo-width': this.$store.state.config['skin.risu.logo_width'],
-                '--brand-color-1': 'var(--risu-rose)',
-                '--brand-color-2': 'var(--risu-rose)',
-                '--brand-bright-color-1': 'var(--risu-pink-soft)',
-                '--brand-bright-color-2': 'var(--risu-pink-soft)',
-                '--text-color': this.selectByTheme('#43333A', '#F0DEE4'),
-                '--article-background-color': this.selectByTheme('#fff', '#2B1C22'),
             };
-            if (brand && this.$store.state.currentTheme !== 'dark') {
-                config['--risu-pink'] = brand;
-                config['--risu-pink-soft'] = this.lightenColor(brand, 35);
-                config['--risu-pink-mist'] = this.lightenColor(brand, 65);
-                config['--risu-page-bg'] = this.lightenColor(brand, 80);
-                config['--risu-border'] = this.lightenColor(brand, 20);
-                config['--risu-border-soft'] = this.lightenColor(brand, 50);
-                config['--risu-rose'] = this.darkenColor(brand, 45);
-                config['--risu-rose-hover'] = this.darkenColor(brand, 55);
-                config['--risu-rose-deep'] = this.darkenColor(brand, 70);
-            }
-            return config;
+        },
+        brandOverrideCss() {
+            const brand = this.$store.state.config['skin.risu.brand_color'];
+            if (!brand) return '';
+            const vars = [
+                `--risu-pink:${brand}`,
+                `--risu-pink-soft:${this.lightenColor(brand, 35)}`,
+                `--risu-pink-mist:${this.lightenColor(brand, 65)}`,
+                `--risu-page-bg:${this.lightenColor(brand, 80)}`,
+                `--risu-border:${this.lightenColor(brand, 20)}`,
+                `--risu-border-soft:${this.lightenColor(brand, 50)}`,
+                `--risu-rose:${this.darkenColor(brand, 45)}`,
+                `--risu-rose-hover:${this.darkenColor(brand, 55)}`,
+                `--risu-rose-deep:${this.darkenColor(brand, 70)}`
+            ].join(';');
+            return `body:not(.theseed-dark-mode) .risu{${vars}}`;
         },
         requestable() {
             return this.$store.state.page.data.editable === true && this.$store.state.page.data.edit_acl_message && this.$store.state.page.viewName !== 'notfound';
