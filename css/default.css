@@ -692,6 +692,29 @@ body.theseed-dark-mode .risu .wiki-article button.submit:focus {
     color: #2B1218 !important;
 }
 
+/* 엔진 generalButton primary(파랑)를 스킨 팔레트로.
+ * CSS 모듈이라 클래스가 해시되므로 부분 일치 선택자를 쓴다.
+ * (커스텀 프로퍼티만 바꾸면 .button 본체 규칙이 그대로 소비한다)
+ */
+.risu [class*="button--primary"]:not([class*="button--disabled"]) {
+    --button-background-color: var(--risu-rose);
+    --button-border-color: var(--risu-rose);
+}
+
+.risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):hover {
+    --button-background-color: var(--risu-rose-hover);
+    --button-border-color: var(--risu-rose-hover);
+}
+
+.risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):focus-visible {
+    --focus-outline-color: var(--risu-pink-soft);
+}
+
+/* 다크 모드의 --risu-rose는 밝은 핑크이므로 버튼 텍스트를 어둡게 */
+body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--disabled"]) {
+    --button-color: #2B1218;
+}
+
 /* ===== footer ===== */
 
 .risu .risu-footer {
