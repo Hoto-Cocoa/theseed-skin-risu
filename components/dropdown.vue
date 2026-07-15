@@ -1,6 +1,6 @@
 <template>
-    <div ref="dropdown" class="dropdown">
-        <div @click="toggle"><slot name="toggle"></slot></div>
+    <div ref="dropdown" class="dropdown" @keydown.esc.stop.prevent="closeOnEscape">
+        <div ref="toggle" @click="toggle"><slot name="toggle" :show="show"></slot></div>
         <div v-if="show" @click="hide" :class="{ 'open': show }"><slot></slot></div>
     </div>
 </template>
@@ -21,6 +21,13 @@ export default {
         },
         backdrop(e) {
             if (this.show && !this.$refs.dropdown.contains(e.target)) this.show = false;
+        },
+        closeOnEscape() {
+            if (!this.show) return;
+            this.show = false;
+            this.$nextTick(() => {
+                this.$refs.toggle?.querySelector('button, a[href]')?.focus();
+            });
         },
     },
     mounted() {

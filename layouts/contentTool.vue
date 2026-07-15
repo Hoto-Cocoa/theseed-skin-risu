@@ -1,18 +1,18 @@
 <template>
     <div v-if="main.length" class="content-tools">
         <div class="btn-group">
-            <template v-for="l in main" :key="l.to">
-                <a v-if="l.onclick" @click.prevent="l.onclick" href="#" class="btn tools-btn" :class="l.class" v-tooltip="l.tooltip" v-text="l.title" v-html="l.html"></a>
+            <template v-for="l in main" :key="l.to || l.title || l.html">
+                <button v-if="l.onclick" type="button" @click="l.onclick" class="btn tools-btn" :class="l.class" v-tooltip="l.tooltip" v-text="l.title" v-html="l.html"></button>
                 <nuxt-link v-else :to="l.to" class="btn tools-btn" :class="l.class" v-tooltip="l.tooltip" v-text="l.title" v-html="l.html"></nuxt-link>
             </template>
             <template v-if="menu.length">
                 <dropdown class="btn tools-btn">
-                    <template #toggle>
-                        <div class="dropdown-toggle"><span class="caret"></span></div>
+                    <template #toggle="{ show }">
+                        <button type="button" class="dropdown-toggle" aria-label="더 보기" :aria-expanded="show"><span class="caret"></span></button>
                     </template>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        <template v-for="m in menu" :key="m.to">
-                            <a v-if="m.onclick" @click.prevent="m.onclick" href="#" class="dropdown-item" :class="m.class">{{ m.title }}</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <template v-for="m in menu" :key="m.to || m.title">
+                            <button v-if="m.onclick" type="button" @click="m.onclick" class="dropdown-item" :class="m.class">{{ m.title }}</button>
                             <nuxt-link v-else :to="m.to" class="dropdown-item" :class="m.class">{{ m.title }}</nuxt-link>
                         </template>
                     </div>
@@ -46,6 +46,9 @@ export default {
     computed: {
         data() {
             return this.$store.state.page.data;
+        },
+        adminConvenience() {
+            return this.$store.state.localConfig['risu.admin_convenience'] !== false;
         }
     },
     methods: {
@@ -111,7 +114,7 @@ export default {
                                 to: this.contribution_link(this.data.user.uuid),
                                 title: "기여 목록"
                             });
-                            if (this.$store.state.session.quick_block && this.$store.state.localConfig['risu.admin_convenience'] !== false) {
+                            if (this.$store.state.session.quick_block && this.adminConvenience) {
                                 this.menu.push({
                                     class: 'admin',
                                     onclick: () => this.openQuickACLGroup({
@@ -284,7 +287,7 @@ export default {
                         class: this.data.account.type === 1 ? '' : 'disabled',
                         title: "사용자 문서"
                     });
-                    if (this.$store.state.session.quick_block && this.$store.state.localConfig['risu.admin_convenience'] !== false) {
+                    if (this.$store.state.session.quick_block && this.adminConvenience) {
                         if (this.data.account.type !== -1) this.menu.push({
                             class: 'admin',
                             onclick: () => this.openQuickACLGroup({
@@ -338,7 +341,7 @@ export default {
                 this.calculate();
             });
         },
-        '$store.state.localConfig'() {
+        adminConvenience() {
             this.$nextTick(() => {
                 this.calculate();
             });

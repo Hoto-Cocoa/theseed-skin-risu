@@ -1,13 +1,42 @@
 <template>
     <form class="risu-search" @submit.prevent>
         <div class="input-search">
-            <input type="search" name="q" placeholder="검색" accesskey="f" autocomplete="off" v-on:input="searchText = $event.target.value" v-model="searchTextModel" @blur="blur" @focus="focus" @input="inputChange" @keydown.enter="keyEnter" @keydown.tab="keyEnter" @keydown.up="keyUp" @keydown.down="keyDown">
+            <input
+                type="search"
+                name="q"
+                placeholder="검색"
+                accesskey="f"
+                autocomplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-controls="risu-search-suggestions"
+                :aria-expanded="show"
+                :aria-activedescendant="activeSuggestionId"
+                v-on:input="searchText = $event.target.value"
+                v-model="searchTextModel"
+                @blur="blur"
+                @focus="focus"
+                @input="inputChange"
+                @keydown.enter="keyEnter"
+                @keydown.up="keyUp"
+                @keydown.down="keyDown"
+            >
             <div class="risu-search-buttons">
-                <button type="submit" name="fulltext" value="검색" title="검색" @click="onClickSearch"><icon name="search" /></button>
-                <button type="submit" name="fulltext" value="보기" title="이동" @click="onClickMove"><icon name="arrow-right" /></button>
+                <button type="submit" name="fulltext" value="검색" title="검색" aria-label="검색" @click="onClickSearch"><icon name="search" /></button>
+                <button type="submit" name="fulltext" value="보기" title="이동" aria-label="이동" @click="onClickMove"><icon name="arrow-right" /></button>
             </div>
-            <div v-if="show" class="v-autocomplete-list">
-                <div class="v-autocomplete-list-item" v-for="(item, i) in internalItems" @click="onClickItem(item)" v-bind:key="i" :class="{ 'v-autocomplete-item-active': i === cursor }" @mouseover="cursor = i">
+            <div v-if="show" id="risu-search-suggestions" class="v-autocomplete-list" role="listbox">
+                <div
+                    v-for="(item, i) in internalItems"
+                    :id="`risu-search-option-${i}`"
+                    :key="i"
+                    class="v-autocomplete-list-item"
+                    role="option"
+                    :aria-selected="i === cursor"
+                    :class="{ 'v-autocomplete-item-active': i === cursor }"
+                    @click="onClickItem(item)"
+                    @mouseover="cursor = i"
+                >
                     <div>{{ item }}</div>
                 </div>
             </div>
@@ -24,6 +53,13 @@ export default {
     mixins: [AutocompleteMixin],
     components: {
         Icon
+    },
+    computed: {
+        activeSuggestionId() {
+            return this.show && this.cursor >= 0 && this.internalItems[this.cursor]
+                ? `risu-search-option-${this.cursor}`
+                : undefined;
+        }
     },
     methods: {
         onClickSearch() {

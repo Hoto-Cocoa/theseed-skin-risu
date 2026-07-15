@@ -9,12 +9,12 @@
             <nuxt-link class="risu-nav-link" to="/RecentDiscuss"><icon name="comments" /><span class="hide-title">최근 토론</span></nuxt-link>
             <nuxt-link class="risu-nav-link" to="/random"><icon name="sparkle" /><span class="hide-title">임의 문서</span></nuxt-link>
             <dropdown>
-                <template #toggle>
-                    <a class="risu-nav-link" href="#" @click.prevent>
+                <template #toggle="{ show }">
+                    <button type="button" class="risu-nav-link" :aria-expanded="show">
                         <icon name="sliders" /><span class="hide-title">도구</span> <span class="caret"></span>
-                    </a>
+                    </button>
                 </template>
-                <div class="dropdown-menu" role="menu">
+                <div class="dropdown-menu">
                     <nuxt-link to="/Upload" class="dropdown-item">파일 올리기</nuxt-link>
                     <div class="dropdown-divider"></div>
                     <nuxt-link to="/NeededPages" class="dropdown-item">작성이 필요한 문서</nuxt-link>
@@ -37,11 +37,11 @@
         <search-form />
         <div class="risu-user">
             <dropdown>
-                <template #toggle>
-                    <a class="risu-user-toggle" href="#" @click.prevent>
-                        <img v-if="$store.state.session.gravatar_url" class="profile-img" :src="$store.state.session.gravatar_url">
+                <template #toggle="{ show }">
+                    <button type="button" class="risu-user-toggle" aria-label="사용자 메뉴" :aria-expanded="show">
+                        <img v-if="$store.state.session.gravatar_url" class="profile-img" :src="$store.state.session.gravatar_url" alt="">
                         <icon v-else name="user" />
-                    </a>
+                    </button>
                 </template>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div v-if="$store.state.session.account.type === 1" class="username dropdown-item">

@@ -2,7 +2,7 @@
     <div class="live-recent-content">
         <ul class="live-recent-list">
             <template v-if="recent.length === 0 && !loaded">
-                <li v-for="i in 10" :key="i"><span class="recent-item">&nbsp;</span></li>
+                <li v-for="i in limit" :key="i"><span class="recent-item">&nbsp;</span></li>
             </template>
             <li v-else-if="recent.length === 0" class="live-recent-empty">
                 아직 표시할 문서가 없습니다.
@@ -40,9 +40,10 @@ export default {
             loaded: false
         };
     },
-    async mounted() {
-        await this.updateSidebar();
-        this.loaded = true;
+    watch: {
+        recent() {
+            this.loaded = true;
+        }
     },
     methods: {
         getDateType(date) {

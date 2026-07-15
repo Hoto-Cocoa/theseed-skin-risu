@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </main>
-            <aside class="risu-sidebar">
+            <aside v-if="sidebarMode === 'right'" class="risu-sidebar">
                 <div class="live-recent">
                     <div class="live-recent-header">최근 변경</div>
                     <recent-card />

@@ -34,7 +34,8 @@ body {
     font-family: var(--risu-font);
     font-size: 1rem;
     line-height: 1.6;
-    word-break: break-all;
+    word-break: normal;
+    overflow-wrap: anywhere;
 }
 
 .risu a {
@@ -70,7 +71,9 @@ body {
 .risu .risu-brand:focus-visible,
 .risu .risu-user-toggle:focus-visible,
 .risu .dropdown-item:focus-visible,
+.risu .dropdown-toggle:focus-visible,
 .risu .btn:focus-visible,
+.risu .risu-search button:focus-visible,
 .risu .scroll-buttons a:focus-visible,
 .risu .live-recent-list .recent-item:focus-visible {
     outline: 2px solid var(--risu-rose);
@@ -266,10 +269,15 @@ body {
 
 .risu .dropdown-item {
     display: block;
+    width: 100%;
     padding: 0.42rem 0.75rem;
     font-size: 0.9rem;
+    font-family: inherit;
     color: var(--risu-text);
+    background: transparent;
+    border: 0;
     border-radius: var(--risu-radius-sm);
+    text-align: left;
     white-space: nowrap;
     cursor: pointer;
 }
@@ -364,7 +372,11 @@ body {
     gap: 0.38em;
     padding: 0.42rem 0.8rem;
     font-size: 0.92rem;
+    font-family: inherit;
+    line-height: inherit;
     color: var(--risu-rose-deep);
+    background: transparent;
+    border: 0;
     border-radius: var(--risu-radius-pill);
     white-space: nowrap;
     cursor: pointer;
@@ -387,7 +399,11 @@ body {
     justify-content: center;
     width: 2.5rem;
     height: 2.5rem;
+    padding: 0;
+    font: inherit;
     color: var(--risu-rose-deep);
+    background: transparent;
+    border: 0;
     border-radius: var(--risu-radius-pill);
     cursor: pointer;
     overflow: hidden;
@@ -495,7 +511,6 @@ body {
     color: var(--risu-text);
     border-radius: var(--risu-radius-sm);
     cursor: pointer;
-    word-break: break-all;
 }
 
 .risu .v-autocomplete-list-item.v-autocomplete-item-active {
@@ -616,7 +631,14 @@ body {
 }
 
 .risu .content-tools .dropdown-toggle {
+    display: block;
+    width: 100%;
     padding: 0.42rem 0.5rem;
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
 }
 
 .risu .content-tools .tools-btn.btn-discuss-progress {
