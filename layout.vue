@@ -223,7 +223,7 @@ export default {
                 `--brand-color-2:${rose}`,
                 `--brand-bright-color-1:${soft}`,
                 `--brand-bright-color-2:${soft}`
-            ].join(';');
+            ];
 
             /* 다크 레시피 (tokens.css 다크 블록의 HSL 분해값 기준) */
             const dSoft = tint(22, 24);
@@ -231,6 +231,15 @@ export default {
             const dText = deep(37, 91);
             const dMuted = deep(18, 62);
             const dCard = tint(21, 14);
+
+            /* 엔진 컴포넌트가 테마를 스스로 고르는 --light-*/--dark-* 쌍
+             * (thetree.css :root 고정 선언을 덮는다) — 양쪽 블록에 모두 공급 */
+            const themePair = [
+                `--light-text-color:${text}`,
+                `--dark-text-color:${dText}`,
+                `--light-article-background-color:#FFFFFF`,
+                `--dark-article-background-color:${dCard}`
+            ];
             const darkVars = [
                 `--risu-pink:${tint(23, 18)}`,
                 `--risu-pink-soft:${dSoft}`,
@@ -251,10 +260,11 @@ export default {
                 `--brand-color-2:${dRose}`,
                 `--brand-bright-color-1:${dSoft}`,
                 `--brand-bright-color-2:${dSoft}`
-            ].join(';');
+            ];
 
             /* 다크는 tokens.css의 body.theseed-dark-mode(0,1,1)를 이기도록 클래스 중복으로 특이도 확보 */
-            return `body:not(.theseed-dark-mode){${lightVars}}body.theseed-dark-mode.theseed-dark-mode{${darkVars}}`;
+            return `body:not(.theseed-dark-mode){${[...lightVars, ...themePair].join(';')}}`
+                + `body.theseed-dark-mode.theseed-dark-mode{${[...darkVars, ...themePair].join(';')}}`;
         },
         selectedFont() {
             const value = this.$store.state.localConfig['risu.font'];
