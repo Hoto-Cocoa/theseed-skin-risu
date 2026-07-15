@@ -44,6 +44,11 @@ body {
     text-decoration: underline;
 }
 
+/* 엔진 탭(linkTab)은 자체 밑줄 인디케이터가 있으므로 호버 밑줄 제외 */
+.risu .link-tab a:hover {
+    text-decoration: none;
+}
+
 .risu img {
     max-width: 100%;
 }
