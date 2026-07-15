@@ -232,7 +232,7 @@ export default {
             const dMuted = deep(18, 62);
             const dCard = tint(21, 14);
 
-            /* 엔진 컴포넌트가 테마를 스스로 고르는 --light-*/--dark-* 쌍
+            /* 엔진 컴포넌트가 테마를 스스로 고르는 light/dark 변수 쌍
              * (thetree.css :root 고정 선언을 덮는다) — 양쪽 블록에 모두 공급 */
             const themePair = [
                 `--light-text-color:${text}`,
