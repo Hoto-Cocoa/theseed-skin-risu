@@ -1,5 +1,5 @@
 <template>
-    <header class="risu-navbar">
+    <header class="risu-navbar" :class="{ scrolled }">
         <nuxt-link class="risu-brand" to="/">
             <img v-if="logoImage" :src="logoImage" :alt="logoText">
             <template v-else>{{ logoText }}</template>
@@ -89,6 +89,18 @@ export default {
         Icon,
         SearchForm
     },
+    data() {
+        return {
+            scrolled: false
+        };
+    },
+    mounted() {
+        window.addEventListener('scroll', this.onScroll, { passive: true });
+        this.onScroll();
+    },
+    beforeUnmount() {
+        window.removeEventListener('scroll', this.onScroll);
+    },
     computed: {
         logoImage() {
             return this.$store.state.config['skin.risu.logo_image'] ?? this.$store.state.config['wiki.logo_url'];
@@ -106,6 +118,9 @@ export default {
         }
     },
     methods: {
+        onScroll() {
+            this.scrolled = window.scrollY > 8;
+        },
         openSettingModal() {
             this.$vfm.show({ component: SettingModal });
         }

@@ -5,6 +5,11 @@
             <option value="hide">숨김</option>
             <option value="footer">하단 표시</option>
         </setting-item-select>
+        <setting-item-select label="글꼴" ckey="risu.font" default="">
+            <option value="">시스템 기본</option>
+            <option value="pretendard">Pretendard</option>
+            <option value="noto">Noto Sans KR</option>
+        </setting-item-select>
         <setting-item-checkbox label="내비게이션 바 고정" ckey="risu.fixed_navbar" :default="true" />
         <setting-item-checkbox label="페이지 이동 시 검색 창 초기화" ckey="risu.reset_search_on_move" :default="true" />
         <setting-item-checkbox label="넓은 화면 모드" ckey="risu.wide_mode" />

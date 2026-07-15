@@ -317,6 +317,11 @@ body {
 
 .risu.navbar-fixed .risu-navbar {
     position: fixed;
+    transition: box-shadow 0.2s ease;
+}
+
+.risu.navbar-fixed .risu-navbar.scrolled {
+    box-shadow: var(--risu-shadow-lg);
 }
 
 .risu.wide .risu-navbar {
@@ -696,6 +701,50 @@ body {
 
 .risu .wiki-article .mobile-table-wrapper {
     overflow-x: auto;
+}
+
+/* 엔진 알림 박스(thetree-alert)를 팔레트에 맞게 틴트.
+ * 컴포넌트 scoped 스타일과의 로드 순서가 보장되지 않으므로 !important 사용. */
+.risu .thetree-alert {
+    background-color: var(--risu-pink-mist) !important;
+    border-color: var(--risu-border-soft) !important;
+    border-radius: var(--risu-radius-md) !important;
+}
+
+.risu .thetree-alert-primary {
+    background-color: var(--risu-pink-soft) !important;
+    border-color: var(--risu-border) !important;
+    color: var(--risu-rose-deep) !important;
+}
+
+.risu .thetree-alert-danger {
+    background-color: var(--risu-danger-mist) !important;
+    border-color: var(--risu-danger) !important;
+}
+
+/* 문단 접기 화살표: Ionicons 글리프 대신 회전하는 셰브런 */
+.risu .wiki-heading::before {
+    content: "" !important;
+    float: left;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0.55em 0.55em 0 0.2rem;
+    border: 0 solid var(--risu-rose);
+    border-right-width: 0.14em;
+    border-bottom-width: 0.14em;
+    border-radius: 0.06em;
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+}
+
+.risu .wiki-heading.wiki-heading-folded::before {
+    transform: rotate(-45deg);
+}
+
+/* 엔진의 h5/h6 회색 밑줄도 핑크 톤으로 */
+.risu .wiki-article h5.wiki-heading,
+.risu .wiki-article h6.wiki-heading {
+    border-bottom-color: var(--risu-pink-soft);
 }
 
 /* ===== engine button harmonization =====

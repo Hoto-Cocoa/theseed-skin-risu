@@ -126,9 +126,13 @@ export default {
         }
     },
     head() {
+        const styles = [];
+        if (this.brandOverrideCss) styles.push({ children: this.brandOverrideCss });
+        if (this.fontCss) styles.push({ children: this.fontCss });
         return {
             meta: [{ name: 'theme-color', content: this.brand_color }],
-            style: this.brandOverrideCss ? [{ children: this.brandOverrideCss }] : []
+            link: this.fontLinks,
+            style: styles
         };
     },
     computed: {
@@ -168,6 +172,24 @@ export default {
                 `--risu-rose-deep:${this.darkenColor(brand, 70)}`
             ].join(';');
             return `body:not(.theseed-dark-mode) .risu{${vars}}`;
+        },
+        selectedFont() {
+            const value = this.$store.state.localConfig['risu.font'];
+            return value === 'pretendard' || value === 'noto' ? value : '';
+        },
+        fontLinks() {
+            if (this.selectedFont === 'pretendard') return [
+                { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css' }
+            ];
+            if (this.selectedFont === 'noto') return [
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap' }
+            ];
+            return [];
+        },
+        fontCss() {
+            if (this.selectedFont === 'noto') return ':root{--risu-font:"Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",sans-serif}';
+            /* pretendard는 tokens.css 기본 스택 최상단에 이미 있으므로 웹폰트 로드만으로 충분 */
+            return '';
         },
         requestable() {
             return this.$store.state.page.data.editable === true && this.$store.state.page.data.edit_acl_message && this.$store.state.page.viewName !== 'notfound';
