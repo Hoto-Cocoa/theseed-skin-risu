@@ -4,6 +4,9 @@
 
 html {
     font-size: 15px;
+    /* 모달이 body 스크롤을 잠글 때 스크롤바 소멸로 뷰포트 폭이 변해
+     * fixed 네비바와 본문의 센터링이 어긋나는 것을 방지 */
+    scrollbar-gutter: stable;
 }
 
 /* 엔진 모달/팝업은 .risu 밖으로 teleport되므로 body 레벨에도 기본 색·서체를 깔아준다 */
