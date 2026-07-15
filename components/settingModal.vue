@@ -7,6 +7,7 @@
         </setting-item-select>
         <setting-item-select label="색상" ckey="risu.color" default="">
             <option value="">기본 (위키 설정)</option>
+            <option value="pink">핑크</option>
             <option value="lavender">라벤더</option>
             <option value="mint">민트</option>
             <option value="sky">하늘</option>

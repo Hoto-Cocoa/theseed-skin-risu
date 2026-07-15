@@ -161,6 +161,7 @@ export default {
         resolvedBrand() {
             /* 우선순위: 사용자 설정(프리셋/커스텀) > 위키 설정 > 기본 핑크(오버라이드 없음) */
             const presets = {
+                pink: '#FFC0CB',
                 lavender: '#D9C6F2',
                 mint: '#BFE8D2',
                 sky: '#BFD9F2',
@@ -177,6 +178,11 @@ export default {
         brandOverrideCss() {
             const brand = this.resolvedBrand;
             if (!brand || !/^#[0-9a-fA-F]{6}$/.test(brand)) return '';
+            /* 그림자 틴트도 브랜드색에서 파생 — 고정하면 색을 바꿔도 핑크 글로우가 남는다 */
+            const shadow = this.darkenColor(brand, 35);
+            const r = parseInt(shadow.substring(1, 3), 16);
+            const g = parseInt(shadow.substring(3, 5), 16);
+            const b = parseInt(shadow.substring(5, 7), 16);
             const vars = [
                 `--risu-pink:${brand}`,
                 `--risu-pink-soft:${this.lightenColor(brand, 35)}`,
@@ -186,7 +192,10 @@ export default {
                 `--risu-border-soft:${this.lightenColor(brand, 50)}`,
                 `--risu-rose:${this.darkenColor(brand, 45)}`,
                 `--risu-rose-hover:${this.darkenColor(brand, 55)}`,
-                `--risu-rose-deep:${this.darkenColor(brand, 70)}`
+                `--risu-rose-deep:${this.darkenColor(brand, 70)}`,
+                `--risu-shadow-sm:0 2px 8px rgba(${r},${g},${b},0.10)`,
+                `--risu-shadow-md:0 6px 20px rgba(${r},${g},${b},0.14)`,
+                `--risu-shadow-lg:0 10px 32px rgba(${r},${g},${b},0.18)`
             ].join(';');
             return `body:not(.theseed-dark-mode) .risu{${vars}}`;
         },
