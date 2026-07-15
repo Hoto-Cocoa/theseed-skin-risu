@@ -84,4 +84,14 @@ body.theseed-dark-mode {
     --risu-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.30);
     --risu-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.36);
     --risu-shadow-lg: 0 10px 32px rgba(0, 0, 0, 0.44);
+
+    /* 제네릭 변수 매핑 재선언 — var() 참조는 "정의된 요소"에서 해석되므로
+     * :root의 매핑은 라이트 값으로 굳는다. 여기서 재선언해야 다크 값을 잡는다. */
+    --text-color: var(--risu-text);
+    --text-secondary-color: var(--risu-text-muted);
+    --article-background-color: var(--risu-card-bg);
+    --brand-color-1: var(--risu-rose);
+    --brand-color-2: var(--risu-rose);
+    --brand-bright-color-1: var(--risu-pink-soft);
+    --brand-bright-color-2: var(--risu-pink-soft);
 }
