@@ -16,10 +16,11 @@ body {
     background-color: var(--risu-page-bg);
 }
 
-.risu,
-.risu *,
-.risu *::before,
-.risu *::after {
+/* 전역 적용: 엔진 컴포넌트(모달 등, .risu 밖 teleport 포함)는
+ * liberty/buma가 깔아주던 전역 border-box를 전제로 치수가 잡혀 있다 */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
