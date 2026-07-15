@@ -657,6 +657,29 @@ body {
     overflow-x: auto;
 }
 
+/* ===== engine button harmonization =====
+ * 엔진 seedButton(.submit)의 파란색을 스킨 팔레트로 맞춘다.
+ * scoped 스타일이 하드코딩 색상이라 !important가 필요하다.
+ */
+
+.risu .wiki-article button.submit {
+    background-color: var(--risu-rose) !important;
+    border-color: var(--risu-rose) !important;
+    color: #fff !important;
+}
+
+.risu .wiki-article button.submit:hover,
+.risu .wiki-article button.submit:focus {
+    background-color: var(--risu-rose-hover) !important;
+    border-color: var(--risu-rose-hover) !important;
+}
+
+body.theseed-dark-mode .risu .wiki-article button.submit,
+body.theseed-dark-mode .risu .wiki-article button.submit:hover,
+body.theseed-dark-mode .risu .wiki-article button.submit:focus {
+    color: #2B1218 !important;
+}
+
 /* ===== footer ===== */
 
 .risu .risu-footer {
