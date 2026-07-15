@@ -127,8 +127,8 @@ export default {
     },
     head() {
         const styles = [];
-        if (this.brandOverrideCss) styles.push({ children: this.brandOverrideCss });
-        if (this.fontCss) styles.push({ children: this.fontCss });
+        if (this.brandOverrideCss) styles.push({ innerHTML: this.brandOverrideCss });
+        if (this.fontCss) styles.push({ innerHTML: this.fontCss });
         return {
             meta: [{ name: 'theme-color', content: this.brand_color }],
             link: this.fontLinks,
