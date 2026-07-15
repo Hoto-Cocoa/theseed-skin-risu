@@ -138,7 +138,12 @@ export default {
     },
     computed: {
         brand_color() {
-            return this.selectByTheme(this.$store.state.config['skin.risu.brand_color'] ?? '#FFC0CB', '#211419');
+            const brand = this.resolvedBrand;
+            if (brand && /^#[0-9a-fA-F]{6}$/.test(brand)) {
+                const { h, s } = this.hexToHsl(brand);
+                return this.selectByTheme(brand, this.hslToHex(h, (s / 100) * 25, 10));
+            }
+            return this.selectByTheme('#FFC0CB', '#211419');
         },
         sidebarMode() {
             const value = this.$store.state.localConfig['risu.sidebar'];
@@ -180,7 +185,8 @@ export default {
             if (!brand || !/^#[0-9a-fA-F]{6}$/.test(brand)) return '';
             /* 기본 핑크 팔레트의 채도·명도 레시피에 브랜드 색상(hue)을 갈아끼운다.
              * 단순 darken/lighten은 채도가 죽어 로즈가 탁해진다.
-             * 브랜드 채도(sb)는 틴트에 그대로, 진한 색에는 sqrt로 완만하게 반영. */
+             * 브랜드 채도(sb)는 틴트에 그대로, 진한 색에는 sqrt로 완만하게 반영.
+             * body 레벨에 선언해 teleport된 모달/팝업까지 상속시킨다. */
             const { h, s } = this.hexToHsl(brand);
             const sb = s / 100;
             const strong = Math.sqrt(sb);
@@ -195,7 +201,7 @@ export default {
             const r = parseInt(shadow.substring(1, 3), 16);
             const g = parseInt(shadow.substring(3, 5), 16);
             const b = parseInt(shadow.substring(5, 7), 16);
-            const vars = [
+            const lightVars = [
                 `--risu-pink:${brand}`,
                 `--risu-pink-soft:${soft}`,
                 `--risu-pink-mist:${tint(100, 96)}`,
@@ -218,7 +224,37 @@ export default {
                 `--brand-bright-color-1:${soft}`,
                 `--brand-bright-color-2:${soft}`
             ].join(';');
-            return `body:not(.theseed-dark-mode) .risu{${vars}}`;
+
+            /* 다크 레시피 (tokens.css 다크 블록의 HSL 분해값 기준) */
+            const dSoft = tint(22, 24);
+            const dRose = deep(100, 81);
+            const dText = deep(37, 91);
+            const dMuted = deep(18, 62);
+            const dCard = tint(21, 14);
+            const darkVars = [
+                `--risu-pink:${tint(23, 18)}`,
+                `--risu-pink-soft:${dSoft}`,
+                `--risu-pink-mist:${tint(21, 16)}`,
+                `--risu-page-bg:${tint(25, 10)}`,
+                `--risu-card-bg:${dCard}`,
+                `--risu-border:${tint(20, 25)}`,
+                `--risu-border-soft:${tint(19, 19)}`,
+                `--risu-rose:${dRose}`,
+                `--risu-rose-hover:${deep(100, 86)}`,
+                `--risu-rose-deep:${deep(100, 91)}`,
+                `--risu-text:${dText}`,
+                `--risu-text-muted:${dMuted}`,
+                `--text-color:${dText}`,
+                `--text-secondary-color:${dMuted}`,
+                `--article-background-color:${dCard}`,
+                `--brand-color-1:${dRose}`,
+                `--brand-color-2:${dRose}`,
+                `--brand-bright-color-1:${dSoft}`,
+                `--brand-bright-color-2:${dSoft}`
+            ].join(';');
+
+            /* 다크는 tokens.css의 body.theseed-dark-mode(0,1,1)를 이기도록 클래스 중복으로 특이도 확보 */
+            return `body:not(.theseed-dark-mode){${lightVars}}body.theseed-dark-mode.theseed-dark-mode{${darkVars}}`;
         },
         selectedFont() {
             const value = this.$store.state.localConfig['risu.font'];
