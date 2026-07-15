@@ -62,7 +62,7 @@
                         <div class="dropdown-divider"></div>
                     </template>
                     <template v-if="$store.state.session.account.uuid">
-                        <nuxt-link class="dropdown-item" :to="contribution_link($store.state.session.account.uuid)">내 문서 기여 목록</nuxt-link>
+                        <nuxt-link class="dropdown-item" :to="contribution_link($store.state.session.account.uuid)">{{ discussContributionLink ? '내 문서 기여 목록' : '내 기여 목록' }}</nuxt-link>
                         <nuxt-link v-if="discussContributionLink" class="dropdown-item" :to="discussContributionLink">내 토론 기여 목록</nuxt-link>
                         <nuxt-link v-if="editRequestContributionLink" class="dropdown-item" :to="editRequestContributionLink">내 편집 요청 목록</nuxt-link>
                         <div class="dropdown-divider"></div>
