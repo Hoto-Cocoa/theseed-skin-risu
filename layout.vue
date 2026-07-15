@@ -90,6 +90,7 @@
 @import "./css/default.css";
 @import "./css/mobile.css";
 @import "./css/dark.css";
+@import "./css/thetree.css";
 </style>
 
 <script>
@@ -157,9 +158,25 @@ export default {
                 '--risu-logo-width': this.$store.state.config['skin.risu.logo_width'],
             };
         },
+        resolvedBrand() {
+            /* 우선순위: 사용자 설정(프리셋/커스텀) > 위키 설정 > 기본 핑크(오버라이드 없음) */
+            const presets = {
+                lavender: '#D9C6F2',
+                mint: '#BFE8D2',
+                sky: '#BFD9F2',
+                peach: '#FFD2B8'
+            };
+            const choice = this.$store.state.localConfig['risu.color'];
+            if (presets[choice]) return presets[choice];
+            if (choice === 'custom') {
+                const custom = this.$store.state.localConfig['risu.color_custom'];
+                if (/^#[0-9a-fA-F]{6}$/.test(custom)) return custom;
+            }
+            return this.$store.state.config['skin.risu.brand_color'];
+        },
         brandOverrideCss() {
-            const brand = this.$store.state.config['skin.risu.brand_color'];
-            if (!brand) return '';
+            const brand = this.resolvedBrand;
+            if (!brand || !/^#[0-9a-fA-F]{6}$/.test(brand)) return '';
             const vars = [
                 `--risu-pink:${brand}`,
                 `--risu-pink-soft:${this.lightenColor(brand, 35)}`,
@@ -175,7 +192,7 @@ export default {
         },
         selectedFont() {
             const value = this.$store.state.localConfig['risu.font'];
-            return value === 'pretendard' || value === 'noto' ? value : '';
+            return ['pretendard', 'noto', 'custom'].includes(value) ? value : '';
         },
         fontLinks() {
             if (this.selectedFont === 'pretendard') return [
@@ -189,6 +206,11 @@ export default {
         fontCss() {
             /* :root:root — tokens.css의 :root 선언보다 특이도를 높여 로드 순서와 무관하게 적용 */
             if (this.selectedFont === 'noto') return ':root:root{--risu-font:"Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",sans-serif}';
+            if (this.selectedFont === 'custom') {
+                /* <style>에 들어가므로 폰트명에 쓰이는 문자만 허용 */
+                const custom = (this.$store.state.localConfig['risu.font_custom'] ?? '').replace(/[^\w\s가-힣.,-]/g, '').trim();
+                if (custom) return `:root:root{--risu-font:"${custom}","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",sans-serif}`;
+            }
             /* pretendard는 tokens.css 기본 스택 최상단에 이미 있으므로 웹폰트 로드만으로 충분 */
             return '';
         },

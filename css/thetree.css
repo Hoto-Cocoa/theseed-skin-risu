@@ -1,0 +1,95 @@
+/* thetree-frontend 내부 클래스에 의존하는 규칙 모음.
+ * the seed는 클래스를 빌드마다 재할당하므로 여기 규칙은 매치되지 않고 무시된다. */
+
+/* 탭(linkTab)은 자체 밑줄 인디케이터가 있으므로 호버 밑줄 제외 */
+.risu .link-tab a:hover {
+    text-decoration: none;
+}
+
+/* 알림 박스(thetree-alert) 팔레트 틴트 — scoped 스타일과의 로드 순서 문제로 !important */
+.risu .thetree-alert {
+    background-color: var(--risu-pink-mist) !important;
+    border-color: var(--risu-border-soft) !important;
+    border-radius: var(--risu-radius-md) !important;
+}
+
+.risu .thetree-alert-primary {
+    background-color: var(--risu-pink-soft) !important;
+    border-color: var(--risu-border) !important;
+    color: var(--risu-rose-deep) !important;
+}
+
+.risu .thetree-alert-danger {
+    background-color: var(--risu-danger-mist) !important;
+    border-color: var(--risu-danger) !important;
+}
+
+/* 문단 접기 화살표: Ionicons 글리프 대신 회전하는 셰브런 */
+.risu .wiki-heading::before {
+    content: "" !important;
+    float: left;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0.55em 0.55em 0 0.2rem;
+    border: 0 solid var(--risu-rose);
+    border-right-width: 0.14em;
+    border-bottom-width: 0.14em;
+    border-radius: 0.06em;
+    transform: rotate(45deg);
+    transition: transform 0.15s ease;
+}
+
+.risu .wiki-heading.wiki-heading-folded::before {
+    transform: rotate(-45deg);
+}
+
+/* h5/h6 회색 밑줄도 핑크 톤으로 */
+.risu .wiki-article h5.wiki-heading,
+.risu .wiki-article h6.wiki-heading {
+    border-bottom-color: var(--risu-pink-soft);
+}
+
+/* seedButton(.submit)의 파란색을 팔레트로 — 하드코딩 색상이라 !important 필요 */
+.risu .wiki-article button.submit {
+    background-color: var(--risu-rose) !important;
+    border-color: var(--risu-rose) !important;
+    color: #fff !important;
+}
+
+.risu .wiki-article button.submit:hover,
+.risu .wiki-article button.submit:focus {
+    background-color: var(--risu-rose-hover) !important;
+    border-color: var(--risu-rose-hover) !important;
+}
+
+body.theseed-dark-mode .risu .wiki-article button.submit,
+body.theseed-dark-mode .risu .wiki-article button.submit:hover,
+body.theseed-dark-mode .risu .wiki-article button.submit:focus {
+    color: #2B1218 !important;
+}
+
+/* generalButton primary(파랑) — CSS 모듈이지만 로컬 클래스명이 보존되므로 부분 일치.
+ * 커스텀 프로퍼티만 바꾸면 .button 본체 규칙이 그대로 소비한다. */
+.risu [class*="button--primary"]:not([class*="button--disabled"]) {
+    --button-background-color: var(--risu-rose);
+    --button-border-color: var(--risu-rose);
+}
+
+.risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):hover {
+    --button-background-color: var(--risu-rose-hover);
+    --button-border-color: var(--risu-rose-hover);
+}
+
+.risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):focus-visible {
+    --focus-outline-color: var(--risu-pink-soft);
+}
+
+body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--disabled"]) {
+    --button-color: #2B1218;
+}
+
+/* inputField(.input)의 기본 상태 변수만 팔레트로 교체 (error/disabled는 엔진 값 유지) */
+.risu .input:not(.error):not(.disabled) {
+    --input-background-color: var(--risu-card-bg);
+    --input-border-color: var(--risu-border);
+}

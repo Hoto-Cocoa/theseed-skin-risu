@@ -44,11 +44,6 @@ body {
     text-decoration: underline;
 }
 
-/* 엔진 탭(linkTab)은 자체 밑줄 인디케이터가 있으므로 호버 밑줄 제외 */
-.risu .link-tab a:hover {
-    text-decoration: none;
-}
-
 .risu img {
     max-width: 100%;
 }
@@ -184,12 +179,6 @@ body {
     border: 1px solid var(--input-border-color, var(--risu-border));
     border-radius: var(--risu-radius-sm);
     padding: 0.35rem 0.7rem;
-}
-
-/* 엔진 inputField의 기본 상태 변수만 팔레트로 교체 (error/disabled는 엔진 값 유지) */
-.risu .input:not(.error):not(.disabled) {
-    --input-background-color: var(--risu-card-bg);
-    --input-border-color: var(--risu-border);
 }
 
 .risu .form-control:focus,
@@ -709,77 +698,6 @@ body {
 
 .risu .wiki-article .mobile-table-wrapper {
     overflow-x: auto;
-}
-
-/* 문단 접기 화살표: Ionicons 글리프 대신 회전하는 셰브런 */
-.risu .wiki-heading::before {
-    content: "" !important;
-    float: left;
-    width: 0.5em;
-    height: 0.5em;
-    margin: 0.55em 0.55em 0 0.2rem;
-    border: 0 solid var(--risu-rose);
-    border-right-width: 0.14em;
-    border-bottom-width: 0.14em;
-    border-radius: 0.06em;
-    transform: rotate(45deg);
-    transition: transform 0.15s ease;
-}
-
-.risu .wiki-heading.wiki-heading-folded::before {
-    transform: rotate(-45deg);
-}
-
-/* 엔진의 h5/h6 회색 밑줄도 핑크 톤으로 */
-.risu .wiki-article h5.wiki-heading,
-.risu .wiki-article h6.wiki-heading {
-    border-bottom-color: var(--risu-pink-soft);
-}
-
-/* ===== engine button harmonization =====
- * 엔진 seedButton(.submit)의 파란색을 스킨 팔레트로 맞춘다.
- * scoped 스타일이 하드코딩 색상이라 !important가 필요하다.
- */
-
-.risu .wiki-article button.submit {
-    background-color: var(--risu-rose) !important;
-    border-color: var(--risu-rose) !important;
-    color: #fff !important;
-}
-
-.risu .wiki-article button.submit:hover,
-.risu .wiki-article button.submit:focus {
-    background-color: var(--risu-rose-hover) !important;
-    border-color: var(--risu-rose-hover) !important;
-}
-
-body.theseed-dark-mode .risu .wiki-article button.submit,
-body.theseed-dark-mode .risu .wiki-article button.submit:hover,
-body.theseed-dark-mode .risu .wiki-article button.submit:focus {
-    color: #2B1218 !important;
-}
-
-/* 엔진 generalButton primary(파랑)를 스킨 팔레트로.
- * CSS 모듈이라 클래스가 해시되므로 부분 일치 선택자를 쓴다.
- * (커스텀 프로퍼티만 바꾸면 .button 본체 규칙이 그대로 소비한다)
- */
-.risu [class*="button--primary"]:not([class*="button--disabled"]) {
-    --button-background-color: var(--risu-rose);
-    --button-border-color: var(--risu-rose);
-}
-
-.risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):hover {
-    --button-background-color: var(--risu-rose-hover);
-    --button-border-color: var(--risu-rose-hover);
-}
-
-.risu [class*="button--primary"]:not([class*="button--unreactive"]):not([class*="button--disabled"]):focus-visible {
-    --focus-outline-color: var(--risu-pink-soft);
-}
-
-/* 다크 모드의 --risu-rose는 밝은 핑크이므로 버튼 텍스트를 어둡게 */
-body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--disabled"]) {
-    --button-color: #2B1218;
 }
 
 /* ===== footer ===== */
