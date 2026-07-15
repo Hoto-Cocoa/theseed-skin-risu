@@ -178,26 +178,33 @@ export default {
         brandOverrideCss() {
             const brand = this.resolvedBrand;
             if (!brand || !/^#[0-9a-fA-F]{6}$/.test(brand)) return '';
-            /* 그림자 틴트도 브랜드색에서 파생 — 고정하면 색을 바꿔도 핑크 글로우가 남는다 */
-            const shadow = this.darkenColor(brand, 35);
+            /* 기본 핑크 팔레트의 채도·명도 레시피에 브랜드 색상(hue)을 갈아끼운다.
+             * 단순 darken/lighten은 채도가 죽어 로즈가 탁해진다.
+             * 브랜드 채도(sb)는 틴트에 그대로, 진한 색에는 sqrt로 완만하게 반영. */
+            const { h, s } = this.hexToHsl(brand);
+            const sb = s / 100;
+            const strong = Math.sqrt(sb);
+            const tint = (sat, light) => this.hslToHex(h, sat * sb, light);
+            const deep = (sat, light) => this.hslToHex(h, sat * strong, light);
+
+            const soft = tint(100, 92.5);
+            const rose = deep(51, 51);
+            const text = deep(14, 23);
+            const muted = deep(11, 49);
+            const shadow = deep(51, 57);
             const r = parseInt(shadow.substring(1, 3), 16);
             const g = parseInt(shadow.substring(3, 5), 16);
             const b = parseInt(shadow.substring(5, 7), 16);
-            /* 텍스트 웜톤도 파생 (기본 핑크 기준 #43333A ≈ darken 74%, #8A6E77 ≈ darken 46%) */
-            const soft = this.lightenColor(brand, 35);
-            const rose = this.darkenColor(brand, 45);
-            const text = this.darkenColor(brand, 74);
-            const muted = this.darkenColor(brand, 46);
             const vars = [
                 `--risu-pink:${brand}`,
                 `--risu-pink-soft:${soft}`,
-                `--risu-pink-mist:${this.lightenColor(brand, 65)}`,
-                `--risu-page-bg:${this.lightenColor(brand, 80)}`,
-                `--risu-border:${this.lightenColor(brand, 20)}`,
-                `--risu-border-soft:${this.lightenColor(brand, 50)}`,
+                `--risu-pink-mist:${tint(100, 96)}`,
+                `--risu-page-bg:${tint(100, 98)}`,
+                `--risu-border:${tint(69, 88)}`,
+                `--risu-border-soft:${tint(75, 94)}`,
                 `--risu-rose:${rose}`,
-                `--risu-rose-hover:${this.darkenColor(brand, 55)}`,
-                `--risu-rose-deep:${this.darkenColor(brand, 70)}`,
+                `--risu-rose-hover:${deep(56, 43)}`,
+                `--risu-rose-deep:${deep(51, 29)}`,
                 `--risu-text:${text}`,
                 `--risu-text-muted:${muted}`,
                 `--risu-shadow-sm:0 2px 8px rgba(${r},${g},${b},0.10)`,
@@ -250,27 +257,34 @@ export default {
                 this.isShowACLMessage = true;
             }
         },
-        darkenColor(hex, percent = 50) {
-            let r = parseInt(hex.substring(1, 3), 16);
-            let g = parseInt(hex.substring(3, 5), 16);
-            let b = parseInt(hex.substring(5, 7), 16);
-
-            r = Math.round(r * (1 - percent / 100));
-            g = Math.round(g * (1 - percent / 100));
-            b = Math.round(b * (1 - percent / 100));
-
-            return "#" + ((r < 16 ? "0" : "") + r.toString(16)) + ((g < 16 ? "0" : "") + g.toString(16)) + ((b < 16 ? "0" : "") + b.toString(16));
+        hexToHsl(hex) {
+            const r = parseInt(hex.substring(1, 3), 16) / 255;
+            const g = parseInt(hex.substring(3, 5), 16) / 255;
+            const b = parseInt(hex.substring(5, 7), 16) / 255;
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const l = (max + min) / 2;
+            let h = 0, s = 0;
+            if (max !== min) {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    default: h = (r - g) / d + 4;
+                }
+                h *= 60;
+            }
+            return { h, s: s * 100, l: l * 100 };
         },
-        lightenColor(hex, percent = 50) {
-            let r = parseInt(hex.substring(1, 3), 16);
-            let g = parseInt(hex.substring(3, 5), 16);
-            let b = parseInt(hex.substring(5, 7), 16);
-
-            r = Math.round(r + (255 - r) * (percent / 100));
-            g = Math.round(g + (255 - g) * (percent / 100));
-            b = Math.round(b + (255 - b) * (percent / 100));
-
-            return "#" + ((r < 16 ? "0" : "") + r.toString(16)) + ((g < 16 ? "0" : "") + g.toString(16)) + ((b < 16 ? "0" : "") + b.toString(16));
+        hslToHex(h, s, l) {
+            s /= 100;
+            l /= 100;
+            const k = n => (n + h / 30) % 12;
+            const a = s * Math.min(l, 1 - l);
+            const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+            const to = x => Math.round(x * 255).toString(16).padStart(2, '0');
+            return '#' + to(f(0)) + to(f(8)) + to(f(4));
         },
         selectByTheme(light, dark) {
             return this.$store.state.currentTheme === 'dark' ? dark : light;
