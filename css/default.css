@@ -62,6 +62,23 @@ body {
     -webkit-appearance: none;
 }
 
+.risu ::selection {
+    background-color: var(--risu-pink-soft);
+    color: var(--risu-rose-deep);
+}
+
+/* 키보드 포커스 가시화 */
+.risu .risu-nav-link:focus-visible,
+.risu .risu-brand:focus-visible,
+.risu .risu-user-toggle:focus-visible,
+.risu .dropdown-item:focus-visible,
+.risu .btn:focus-visible,
+.risu .scroll-buttons a:focus-visible,
+.risu .live-recent-list .recent-item:focus-visible {
+    outline: 2px solid var(--risu-rose);
+    outline-offset: 1px;
+}
+
 /* ===== generic controls (부트스트랩 미포함 — 자체 구현) ===== */
 
 .risu .btn {
@@ -620,6 +637,12 @@ body {
 .risu .wiki-article {
     min-height: 25rem;
     color: var(--text-color, var(--risu-text));
+}
+
+/* 고정 네비바가 앵커 이동(목차, #s-N) 목적지를 가리지 않도록 */
+.risu.navbar-fixed .wiki-article [id],
+.risu.navbar-fixed .wiki-article .wiki-heading {
+    scroll-margin-top: 5.4rem;
 }
 
 .risu .wiki-article h1,

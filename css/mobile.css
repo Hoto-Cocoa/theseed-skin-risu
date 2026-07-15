@@ -1,6 +1,17 @@
 /* risu — responsive */
 
 @media (max-width: 1023px) {
+    /* 모바일 네비바가 더 높으므로 앵커 여백도 늘린다 */
+    .risu.navbar-fixed .wiki-article [id],
+    .risu.navbar-fixed .wiki-article .wiki-heading {
+        scroll-margin-top: 8rem;
+    }
+
+    /* 짧은 문서에서 카드 하단 공백 최소화 */
+    .risu .wiki-article {
+        min-height: 10rem;
+    }
+
     .risu .risu-navbar,
     .risu.wide .risu-navbar {
         top: 0;
@@ -69,6 +80,33 @@
 
     .risu .risu-wrap {
         padding-top: 7.2rem;
+    }
+}
+
+@media print {
+    .risu {
+        background: #fff;
+    }
+
+    .risu .risu-navbar,
+    .risu .risu-sidebar,
+    .risu .scroll-buttons,
+    .risu .content-tools,
+    .risu .risu-notice,
+    .risu .footer-recent {
+        display: none !important;
+    }
+
+    .risu .risu-wrap {
+        display: block;
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .risu .risu-content {
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
     }
 }
 
