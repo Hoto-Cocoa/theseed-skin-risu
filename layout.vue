@@ -187,7 +187,8 @@ export default {
             return [];
         },
         fontCss() {
-            if (this.selectedFont === 'noto') return ':root{--risu-font:"Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",sans-serif}';
+            /* :root:root — tokens.css의 :root 선언보다 특이도를 높여 로드 순서와 무관하게 적용 */
+            if (this.selectedFont === 'noto') return ':root:root{--risu-font:"Noto Sans KR","Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",sans-serif}';
             /* pretendard는 tokens.css 기본 스택 최상단에 이미 있으므로 웹폰트 로드만으로 충분 */
             return '';
         },
