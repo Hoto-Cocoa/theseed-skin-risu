@@ -36,6 +36,8 @@ body {
     line-height: 1.6;
     word-break: normal;
     overflow-wrap: anywhere;
+    /* 엔진(linkTab 등)이 full-bleed 계산에 쓰는 본문 좌우 패딩 — .risu-content와 일치 */
+    --article-padding-x: 1.6rem;
 }
 
 .risu a {

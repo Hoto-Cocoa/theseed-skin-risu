@@ -238,7 +238,9 @@ export default {
                 `--light-text-color:${text}`,
                 `--dark-text-color:${dText}`,
                 `--light-article-background-color:#FFFFFF`,
-                `--dark-article-background-color:${dCard}`
+                `--dark-article-background-color:${dCard}`,
+                `--light-text-secondary-color:${muted}`,
+                `--dark-text-secondary-color:${dMuted}`
             ];
             const darkVars = [
                 `--risu-pink:${tint(23, 18)}`,

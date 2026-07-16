@@ -59,6 +59,10 @@
 }
 
 @media (max-width: 520px) {
+    .risu {
+        --article-padding-x: 1rem;
+    }
+
     .risu .risu-content {
         padding: 1rem 1rem 1.2rem;
         border-radius: var(--risu-radius-md);

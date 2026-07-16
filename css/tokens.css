@@ -47,9 +47,12 @@
     --risu-font-mono: "Cascadia Code", "D2Coding", Consolas, "Nanum Gothic Coding",
         monospace;
 
-    /* 엔진 컴포넌트(모달, 컨텍스트 메뉴, 폼)가 소비하는 제네릭 변수 */
+    /* 엔진 컴포넌트(모달, 컨텍스트 메뉴, 폼)가 소비하는 제네릭 변수
+     * light/dark 쌍은 엔진이 테마를 스스로 골라 소비하므로 둘 다 상수로 공급 */
     --text-color: var(--risu-text);
     --text-secondary-color: var(--risu-text-muted);
+    --light-text-secondary-color: #8A6E77;
+    --dark-text-secondary-color: #B08E9B;
     --article-background-color: var(--risu-card-bg);
     --light-text-color: #43333A;
     --dark-text-color: #F0DEE4;
