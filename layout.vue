@@ -151,7 +151,7 @@ export default {
         },
         rootClass() {
             return {
-                'navbar-fixed': this.$store.state.localConfig['risu.fixed_navbar'] !== false,
+                'navbar-floating': this.$store.state.localConfig['risu.floating_navbar'] !== false,
                 'wide': this.$store.state.localConfig['risu.wide_mode'] === true
             };
         },

@@ -325,12 +325,12 @@ body {
     box-shadow: var(--risu-shadow-md);
 }
 
-.risu.navbar-fixed .risu-navbar {
+.risu.navbar-floating .risu-navbar {
     position: fixed;
     transition: box-shadow 0.2s ease;
 }
 
-.risu.navbar-fixed .risu-navbar.scrolled {
+.risu.navbar-floating .risu-navbar.scrolled {
     box-shadow: var(--risu-shadow-lg);
 }
 
@@ -669,8 +669,8 @@ body {
 }
 
 /* 고정 네비바가 앵커 이동(목차, #s-N) 목적지를 가리지 않도록 */
-.risu.navbar-fixed .wiki-article [id],
-.risu.navbar-fixed .wiki-article .wiki-heading {
+.risu.navbar-floating .wiki-article [id],
+.risu.navbar-floating .wiki-article .wiki-heading {
     scroll-margin-top: 5.4rem;
 }
 

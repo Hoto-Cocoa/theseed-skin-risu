@@ -2,8 +2,8 @@
 
 @media (max-width: 1023px) {
     /* 모바일 네비바가 더 높으므로 앵커 여백도 늘린다 */
-    .risu.navbar-fixed .wiki-article [id],
-    .risu.navbar-fixed .wiki-article .wiki-heading {
+    .risu.navbar-floating .wiki-article [id],
+    .risu.navbar-floating .wiki-article .wiki-heading {
         scroll-margin-top: 8rem;
     }
 
