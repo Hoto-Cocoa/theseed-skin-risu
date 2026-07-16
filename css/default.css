@@ -633,7 +633,8 @@ body {
     border-radius: var(--risu-radius-lg);
     box-shadow: var(--risu-shadow-md);
     padding: 1.3rem 1.6rem 1.6rem;
-    overflow-wrap: break-word;
+    /* overflow-wrap은 .risu의 anywhere를 상속 — break-word로 덮으면
+     * grid 열 min-content에 반영되지 않아 긴 토큰(IPv6 등)이 열을 밀어낸다 */
 }
 
 .risu .risu-content-header .title h1 {
