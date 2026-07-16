@@ -72,10 +72,26 @@
         font-size: 1.55rem;
     }
 
+    /* 툴바를 제목 아래로 (DOM은 툴바가 먼저지만 order로 뒤집는다) */
+    .risu .risu-content-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .risu .risu-content-header .title {
+        order: 1;
+    }
+
     .risu .content-tools {
+        order: 2;
         float: none;
-        margin: 0 0 0.7rem;
+        margin: 0.45rem 0 0.15rem;
         overflow-x: auto;
+    }
+
+    /* 구분선(::after)은 마지막 유지 */
+    .risu .risu-content-header::after {
+        order: 3;
     }
 
     .risu .wiki-article table.wikitable,
