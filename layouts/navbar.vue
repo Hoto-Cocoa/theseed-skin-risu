@@ -36,6 +36,9 @@
         </nav>
         <search-form />
         <div class="risu-user">
+            <notification-menu />
+        </div>
+        <div class="risu-user">
             <dropdown>
                 <template #toggle="{ show }">
                     <button type="button" class="risu-user-toggle" aria-label="사용자 메뉴" :aria-expanded="show">
@@ -79,6 +82,7 @@
 import Common from '~/mixins/common';
 import Dropdown from '../components/dropdown';
 import Icon from '../components/icon';
+import NotificationMenu from '../components/notificationMenu';
 import SearchForm from './searchForm';
 import SettingModal from '../components/settingModal';
 
@@ -87,6 +91,7 @@ export default {
     components: {
         Dropdown,
         Icon,
+        NotificationMenu,
         SearchForm
     },
     data() {

@@ -421,6 +421,69 @@ body {
     border-radius: var(--risu-radius-pill);
 }
 
+/* ===== notifications ===== */
+
+.risu .risu-notif-toggle {
+    position: relative;
+}
+
+.risu .risu-notif-badge {
+    position: absolute;
+    top: 0.15rem;
+    right: 0.1rem;
+    min-width: 1.1em;
+    padding: 0.05em 0.3em;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    color: #fff;
+    background-color: var(--risu-danger);
+    border-radius: var(--risu-radius-pill);
+}
+
+.risu .risu-notif-menu {
+    min-width: 17rem;
+    max-width: 21rem;
+}
+
+.risu .risu-notif-item {
+    white-space: normal;
+    line-height: 1.45;
+}
+
+.risu .risu-notif-title {
+    display: block;
+    font-weight: 600;
+}
+
+.risu .risu-notif-preview {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--risu-text-muted);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.risu .risu-notif-date {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--risu-text-muted);
+    margin-top: 0.1rem;
+}
+
+.risu .risu-notif-empty {
+    color: var(--risu-text-muted);
+    cursor: default;
+}
+
+.risu .risu-notif-empty:hover {
+    background-color: transparent;
+    color: var(--risu-text-muted);
+}
+
 .risu .risu-user .username {
     cursor: default;
     color: var(--risu-text-muted);
