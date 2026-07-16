@@ -8,7 +8,7 @@
         <ul class="footer-places" v-html="$store.state.config['skin.risu.footer_html'] || $store.state.config['wiki.footer_text']" @click="onDynamicContentClick($event)" />
         <ul class="footer-icons">
             <li class="footer-poweredbyico">
-                <nuxt-link to="/License">risu</nuxt-link> | <a href="//theseed.io/">the seed</a>
+                <a href="https://github.com/Hoto-Cocoa/theseed-skin-risu" target="_blank">risu</a> | <a href="//theseed.io/">the seed</a>
             </li>
         </ul>
     </footer>
