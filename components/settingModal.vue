@@ -22,7 +22,7 @@
             <option value="custom">직접 입력</option>
         </setting-item-select>
         <setting-item-input v-if="$store.state.localConfig['risu.font'] === 'custom'" label="글꼴 이름" note="기기에 설치된 글꼴" ckey="risu.font_custom" />
-        <setting-item-checkbox label="내비게이션 바 고정" ckey="risu.floating_navbar" :default="true" />
+        <setting-item-checkbox label="떠 있는 내비게이션 바" ckey="risu.floating_navbar" :default="true" />
         <setting-item-checkbox label="페이지 이동 시 검색 창 초기화" ckey="risu.reset_search_on_move" :default="true" />
         <setting-item-checkbox label="넓은 화면 모드" ckey="risu.wide_mode" />
         <template v-if="$store.state.session.quick_block">
