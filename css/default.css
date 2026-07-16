@@ -425,6 +425,8 @@ body {
 
 .risu .risu-notif-toggle {
     position: relative;
+    /* .risu-user-toggle의 overflow: hidden(프로필 원형 클리핑)이 배지를 자르지 않도록 */
+    overflow: visible;
 }
 
 .risu .risu-notif-badge {
