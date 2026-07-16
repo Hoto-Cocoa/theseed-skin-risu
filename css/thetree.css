@@ -109,3 +109,16 @@ body.theseed-dark-mode .risu [class*="button--primary"]:not([class*="button--unr
     --input-background-color: var(--risu-card-bg);
     --input-border-color: var(--risu-border);
 }
+
+/* 목록 행 호버 (최근 변경/토론의 .table-row, 알림의 .row) — 엔진이 회색
+ * (#fbfbfb / #2a2a2a)을 깔아 팔레트와 어긋남 (GitHub #1).
+ * 엔진 규칙은 scoped 속성 포함 (0,4~5,0)이므로 특이도를 확실히 위로. */
+body:not(.theseed-dark-mode) .risu .risu-content .table-row:not(.table-heading):hover,
+body:not(.theseed-dark-mode) .risu .risu-content .row-parent .row:hover {
+    background-color: var(--risu-pink-mist);
+}
+
+body.theseed-dark-mode.theseed-dark-mode .risu .table-row:not(.table-heading):hover,
+body.theseed-dark-mode.theseed-dark-mode .risu .row-parent .row:hover {
+    background-color: var(--risu-pink-soft);
+}

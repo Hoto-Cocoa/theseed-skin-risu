@@ -57,7 +57,7 @@
     --light-text-color: #43333A;
     --dark-text-color: #F0DEE4;
     --light-article-background-color: #FFFFFF;
-    --dark-article-background-color: #2B1C22;
+    --dark-article-background-color: #272023;
     --brand-color-1: var(--risu-rose);
     --brand-color-2: var(--risu-rose);
     --brand-bright-color-1: var(--risu-pink-soft);
@@ -65,16 +65,18 @@
 }
 
 body.theseed-dark-mode {
+    /* 배경 계열은 채도를 절반으로 낮춘 값 (사용자 피드백: 다크 배경이 너무
+     * 분홍함) — 네비바(pink)·호버 fill(soft)·로즈 포인트는 유지 */
     --risu-pink: #3A242D;
     --risu-pink-soft: #4A2F3A;
-    --risu-pink-mist: #33212A;
+    --risu-pink-mist: #2D2528;
 
-    --risu-page-bg: #211419;
-    --risu-card-bg: #2B1C22;
-    --risu-border: #4C333D;
-    --risu-border-soft: #3B2831;
+    --risu-page-bg: #1D1619;
+    --risu-card-bg: #272023;
+    --risu-border: #47383E;
+    --risu-border-soft: #352C2F;
 
-    --risu-rose: #FF9EB8;        /* 8.4:1 on #2B1C22 */
+    --risu-rose: #FF9EB8;        /* 8.4:1 on #272023 */
     --risu-rose-hover: #FFBACB;
     --risu-rose-deep: #FFD3DD;
     --risu-text: #F0DEE4;

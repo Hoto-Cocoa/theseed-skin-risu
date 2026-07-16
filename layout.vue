@@ -230,7 +230,7 @@ export default {
             const dRose = deep(100, 81);
             const dText = deep(37, 91);
             const dMuted = deep(18, 62);
-            const dCard = tint(21, 14);
+            const dCard = tint(10, 14);
 
             /* 엔진 컴포넌트가 테마를 스스로 고르는 light/dark 변수 쌍
              * (thetree.css :root 고정 선언을 덮는다) — 양쪽 블록에 모두 공급 */
@@ -245,11 +245,11 @@ export default {
             const darkVars = [
                 `--risu-pink:${tint(23, 18)}`,
                 `--risu-pink-soft:${dSoft}`,
-                `--risu-pink-mist:${tint(21, 16)}`,
-                `--risu-page-bg:${tint(25, 10)}`,
+                `--risu-pink-mist:${tint(10, 16)}`,
+                `--risu-page-bg:${tint(12, 10)}`,
                 `--risu-card-bg:${dCard}`,
-                `--risu-border:${tint(20, 25)}`,
-                `--risu-border-soft:${tint(19, 19)}`,
+                `--risu-border:${tint(12, 25)}`,
+                `--risu-border-soft:${tint(10, 19)}`,
                 `--risu-rose:${dRose}`,
                 `--risu-rose-hover:${deep(100, 86)}`,
                 `--risu-rose-deep:${deep(100, 91)}`,
