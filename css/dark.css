@@ -28,3 +28,22 @@ body.theseed-dark-mode .risu .btn-danger:hover,
 body.theseed-dark-mode .risu .btn-danger:focus {
     color: #2B1218;
 }
+
+/* 다크에서 pink-mist는 카드 배경과 거의 같아 호버 피드백이 텍스트 색
+ * 깜빡임만 남는다 — 배경을 확실히 보이는 soft로, 텍스트는 순한 rose-deep으로 */
+body.theseed-dark-mode .risu .dropdown-item:hover {
+    background-color: var(--risu-pink-soft);
+    color: var(--risu-rose-deep);
+}
+
+body.theseed-dark-mode .risu .btn:hover,
+body.theseed-dark-mode .risu .btn:focus {
+    background-color: var(--risu-pink-soft);
+    color: var(--risu-rose-deep);
+}
+
+body.theseed-dark-mode .risu .v-autocomplete-list-item.v-autocomplete-item-active,
+body.theseed-dark-mode .risu .live-recent-list .recent-item:hover {
+    background-color: var(--risu-pink-soft);
+    color: var(--risu-rose-deep);
+}

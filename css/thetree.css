@@ -122,3 +122,13 @@ body.theseed-dark-mode.theseed-dark-mode .risu .table-row:not(.table-heading):ho
 body.theseed-dark-mode.theseed-dark-mode .risu .row-parent .row:hover {
     background-color: var(--risu-pink-soft);
 }
+
+/* 토론 발제자 하이라이트 — 엔진의 초록(#b0d3ad / #324432)이 분홍 링크와
+ * 충돌 (사용자 피드백). 팔레트 틴트로 교체. */
+body:not(.theseed-dark-mode) .risu div.comment div.user-block.user-starter {
+    background: var(--risu-pink);
+}
+
+body.theseed-dark-mode.theseed-dark-mode .risu div.comment div.user-block.user-starter {
+    background-color: var(--risu-pink-soft);
+}
