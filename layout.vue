@@ -187,7 +187,7 @@ export default {
              * 단순 darken/lighten은 채도가 죽어 로즈가 탁해진다.
              * 브랜드 채도(sb)는 틴트에 그대로, 진한 색에는 sqrt로 완만하게 반영.
              * body 레벨에 선언해 teleport된 모달/팝업까지 상속시킨다. */
-            const { h, s } = this.hexToHsl(brand);
+            const { h, s, l } = this.hexToHsl(brand);
             const sb = s / 100;
             const strong = Math.sqrt(sb);
             const tint = (sat, light) => this.hslToHex(h, sat * sb, light);
@@ -195,9 +195,15 @@ export default {
 
             const soft = tint(100, 92.5);
             const rose = deep(51, 51);
+            const roseDeep = deep(51, 29);
             const text = deep(14, 23);
             const muted = deep(11, 49);
             const shadow = deep(51, 57);
+            /* 내비바·btn-primary·라벨 등은 --risu-pink(브랜드 원색)를 배경으로 그대로 쓴다.
+             * rose-deep은 "밝은 배경 위 텍스트" 레시피라 브랜드 자체가 어두우면
+             * (예: 짙은 다크레드) 배경도 텍스트도 둘 다 어두워져 안 보인다.
+             * 브랜드 자체 명도(l)가 낮을 때만 밝은 톤으로 전환한다. */
+            const onBrand = l < 55 ? deep(37, 91) : roseDeep;
             const r = parseInt(shadow.substring(1, 3), 16);
             const g = parseInt(shadow.substring(3, 5), 16);
             const b = parseInt(shadow.substring(5, 7), 16);
@@ -210,7 +216,8 @@ export default {
                 `--risu-border-soft:${tint(75, 94)}`,
                 `--risu-rose:${rose}`,
                 `--risu-rose-hover:${deep(56, 43)}`,
-                `--risu-rose-deep:${deep(51, 29)}`,
+                `--risu-rose-deep:${roseDeep}`,
+                `--risu-on-brand:${onBrand}`,
                 `--risu-text:${text}`,
                 `--risu-text-muted:${muted}`,
                 `--risu-shadow-sm:0 2px 8px rgba(${r},${g},${b},0.10)`,
@@ -231,6 +238,7 @@ export default {
             const dText = deep(37, 91);
             const dMuted = deep(18, 62);
             const dCard = tint(10, 14);
+            const dRoseDeep = deep(100, 91);
 
             /* 엔진 컴포넌트가 테마를 스스로 고르는 light/dark 변수 쌍
              * (thetree.css :root 고정 선언을 덮는다) — 양쪽 블록에 모두 공급 */
@@ -252,7 +260,8 @@ export default {
                 `--risu-border-soft:${tint(10, 19)}`,
                 `--risu-rose:${dRose}`,
                 `--risu-rose-hover:${deep(100, 86)}`,
-                `--risu-rose-deep:${deep(100, 91)}`,
+                `--risu-rose-deep:${dRoseDeep}`,
+                `--risu-on-brand:${dRoseDeep}`,
                 `--risu-text:${dText}`,
                 `--risu-text-muted:${dMuted}`,
                 `--text-color:${dText}`,

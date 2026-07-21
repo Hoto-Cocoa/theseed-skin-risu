@@ -118,7 +118,7 @@ body {
 .risu .btn-primary {
     background-color: var(--risu-pink);
     border-color: var(--risu-pink);
-    color: var(--risu-rose-deep);
+    color: var(--risu-on-brand);
 }
 
 .risu .btn-primary:hover,
@@ -238,7 +238,7 @@ body {
     font-size: 0.8rem;
     border-radius: var(--risu-radius-pill);
     background-color: var(--risu-pink);
-    color: var(--risu-rose-deep);
+    color: var(--risu-on-brand);
 }
 
 /* ===== dropdown ===== */
@@ -343,7 +343,7 @@ body {
     align-items: center;
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--risu-rose-deep);
+    color: var(--risu-on-brand);
     padding: 0.2rem 0.6rem;
     border-radius: var(--risu-radius-pill);
     white-space: nowrap;
@@ -376,7 +376,7 @@ body {
     font-size: 0.92rem;
     font-family: inherit;
     line-height: inherit;
-    color: var(--risu-rose-deep);
+    color: var(--risu-on-brand);
     background: transparent;
     border: 0;
     border-radius: var(--risu-radius-pill);
@@ -403,7 +403,7 @@ body {
     height: 2.5rem;
     padding: 0;
     font: inherit;
-    color: var(--risu-rose-deep);
+    color: var(--risu-on-brand);
     background: transparent;
     border: 0;
     border-radius: var(--risu-radius-pill);
@@ -412,6 +412,7 @@ body {
 }
 
 .risu .risu-user-toggle:hover {
+    color: var(--risu-rose-deep);
     background-color: var(--risu-pink-soft);
 }
 
@@ -830,7 +831,7 @@ body {
 .risu .live-recent-header {
     padding: 0.7rem 1.1rem;
     background-color: var(--risu-pink);
-    color: var(--risu-rose-deep);
+    color: var(--risu-on-brand);
     font-weight: 700;
     font-size: 0.95rem;
 }
@@ -898,12 +899,13 @@ body {
     width: 2.5rem;
     height: 2.5rem;
     background-color: var(--risu-pink);
-    color: var(--risu-rose-deep);
+    color: var(--risu-on-brand);
     border-radius: var(--risu-radius-pill);
     box-shadow: var(--risu-shadow-md);
 }
 
 .risu .scroll-buttons a:hover {
+    color: var(--risu-rose-deep);
     background-color: var(--risu-pink-soft);
     text-decoration: none;
 }

@@ -22,6 +22,7 @@
     --risu-rose: #C2426A;        /* 4.9:1 on #FFF */
     --risu-rose-hover: #A93058;
     --risu-rose-deep: #6E2438;   /* 6.9:1 on #FFC0CB */
+    --risu-on-brand: var(--risu-rose-deep);  /* --risu-pink 배경(내비바 등) 전용 텍스트. 기본 핑크는 밝으므로 rose-deep과 동일 */
     --risu-text: #43333A;
     --risu-text-muted: #8A6E77;
     --risu-danger: #D64560;
@@ -79,6 +80,7 @@ body.theseed-dark-mode {
     --risu-rose: #FF9EB8;        /* 8.4:1 on #272023 */
     --risu-rose-hover: #FFBACB;
     --risu-rose-deep: #FFD3DD;
+    --risu-on-brand: var(--risu-rose-deep);  /* 다크 테마의 --risu-pink은 항상 어두우므로 rose-deep(밝은 값)과 동일 */
     --risu-text: #F0DEE4;
     --risu-text-muted: #B08E9B;
     --risu-danger: #FF7A93;
